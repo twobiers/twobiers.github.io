@@ -1,0 +1,51 @@
+baseURL = 'https://tobi6112.github.io/'
+languageCode = "en-us"
+title = "Sobchak"
+theme = "hugo-coder"
+defaultcontentlanguage = "en"
+
+paginate = 20
+
+pygmentsstyle = "bw"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+disqusShortname = "yourdiscussshortname "
+
+[params]
+  author = "Walter Sobchak"
+  info = "Passionate choleric"
+  description = "John Doe's personal website"
+  keywords = "blog,developer,personal"
+  avatarurl = "images/avatar.png"
+
+  favicon_32 = "/img/favicon-32x32.png"
+  favicon_16 = "/img/favicon-16x16.png"
+
+  footercontent = "Enter a text here."
+  hideFooter = false
+  hideCredits = false
+  hideCopyright = false
+
+  enableTwemoji = true
+
+  colorScheme = "auto"
+  hidecolorschemetoggle = false
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "fa fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/tobi6112/"
+[[params.social]]
+  name = "Spotify"
+  icon = "fa fa-spotify fa-2x"
+  weight = 2
+  url = "https://open.spotify.com/user/rchhnd4"
