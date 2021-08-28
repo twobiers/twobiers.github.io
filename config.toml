@@ -10,8 +10,6 @@ pygmentsstyle = "bw"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-disqusShortname = "yourdiscussshortname "
-
 [params]
   author = "Walter Sobchak"
   info = "Passionate choleric"
@@ -31,12 +29,6 @@ disqusShortname = "yourdiscussshortname "
 
   colorScheme = "auto"
   hidecolorschemetoggle = false
-
-[taxonomies]
-  category = "categories"
-  series = "series"
-  tag = "tags"
-  author = "authors"
 
 # Social links
 [[params.social]]
