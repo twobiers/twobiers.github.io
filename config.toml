@@ -30,6 +30,12 @@ pygmentscodefencesguesssyntax = true
   colorScheme = "auto"
   hidecolorschemetoggle = false
 
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
 # Social links
 [[params.social]]
   name = "Github"
@@ -51,7 +57,3 @@ pygmentscodefencesguesssyntax = true
   name = "About"
   weight = 2
   url = "about/"
-[[menu.main]]
-  name = "Projects"
-  weight = 3
-  url = "projects/"
