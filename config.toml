@@ -11,16 +11,16 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 [params]
-  author = "Walter Sobchak"
-  info = "Passionate choleric"
-  description = "John Doe's personal website"
+  author = "Tobi"
+  info = "🥒"
+  description = "Web Page Of Stupid Random Stuff"
   keywords = "blog,developer,personal"
   avatarurl = "images/avatar.jpg"
 
   favicon_32 = "/img/favicon-32x32.png"
   favicon_16 = "/img/favicon-16x16.png"
 
-  footercontent = "Enter a text here."
+  footercontent = ""
   hideFooter = false
   hideCredits = false
   hideCopyright = false
