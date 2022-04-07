@@ -1,4 +1,4 @@
-baseURL = 'https://tobi6112.github.io/'
+baseURL = 'https://twobiers.github.io/'
 languageCode = "en-us"
 title = "Sobchak"
 theme = "hugo-coder"
@@ -41,7 +41,7 @@ pygmentscodefencesguesssyntax = true
   name = "Github"
   icon = "fa fa-github fa-2x"
   weight = 1
-  url = "https://github.com/tobi6112/"
+  url = "https://github.com/twobiers/"
 [[params.social]]
   name = "Spotify"
   icon = "fa fa-spotify fa-2x"
