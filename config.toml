@@ -24,8 +24,14 @@ pygmentscodefencesguesssyntax = true
   tag = "tags"
   author = "authors"
 
+[Params.Entry]
+  meta = ["date", "categories", "tags"]
+
 [Params.Social]
   github = "twobiers"
+
+[Params.Breadcrumb]
+  enable = true
 
 # Menu links
 [[menu.main]]
@@ -36,3 +42,13 @@ pygmentscodefencesguesssyntax = true
   name = "About"
   weight = 2
   url = "/about"
+
+[outputFormats]
+  [outputFormats.MANIFEST]
+    mediaType = "application/json"
+    baseName = "manifest"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "MANIFEST"]
