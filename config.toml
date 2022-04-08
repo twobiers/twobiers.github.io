@@ -10,6 +10,8 @@ pygmentsstyle = "bw"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
+enableRobotsTXT = true
+
 [Author]
   name = "Tobi"
   bio = "🥒"
