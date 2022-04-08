@@ -55,3 +55,6 @@ enableRobotsTXT = true
 
 [outputs]
   home = ["HTML", "RSS", "MANIFEST"]
+
+[frontmatter]
+	date = [":filename", ":default", ":fileModTime"]
