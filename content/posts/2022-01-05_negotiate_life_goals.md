@@ -2,7 +2,6 @@
 draft = false
 title = "Is The Negation Of Life Goals The Key To Success?"
 description = "Setting upper bounds for failures"
-author = "Tobi"
 tags = [
     "quick think"
 ]
