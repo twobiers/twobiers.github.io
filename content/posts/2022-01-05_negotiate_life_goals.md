@@ -4,7 +4,6 @@ title = "Is The Negation Of Life Goals The Key To Success?"
 description = "Setting upper bounds for failures"
 author = "Tobi"
 tags = [
-    "lifestyle",
     "quick think"
 ]
 date = "2022-01-05"

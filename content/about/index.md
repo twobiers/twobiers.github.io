@@ -1,7 +1,6 @@
 ---
 title: "About Me"
 description: "Let me introduce you"
-aliases: ["about-me", "profile", "contact"]
 ---
 
 Hi, I'm Tobi. Well, also I'm Arno, Walter, Hans, Starney - way to many pseudonyms 
