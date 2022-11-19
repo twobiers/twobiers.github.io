@@ -1,12 +1,14 @@
 +++ 
 draft = false
-title = "The `@Transactional`-Kotlin Mismatch"
+title = "The @Transactional-Kotlin Mismatch"
 description = "How to make your productive environment inconsistent with a single exception"
 tags = [
     "java",
     "kotlin",
     "spring-boot"
 ]
+showTableOfContents = false
+issueId = 1
 +++
 
 Recently, I've worked with a Spring Boot project written Kotlin, 
@@ -116,7 +118,7 @@ is more accessible.
 
 # Appendix
 
-Here is a test case validating my statements:
+{{< details "Here is a test case validating my statements">}}
 
 **JavaRuntimeException.java**
 ```java
@@ -197,3 +199,5 @@ class TransactionExceptionTest {
     }
 }
 ```
+
+{{< /details >}}

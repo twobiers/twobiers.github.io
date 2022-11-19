@@ -1,0 +1,8 @@
+description = "Web Page Of Stupid Random Stuff"
+homepage.layout = "profile"
+
+[article]
+    showComments = true
+
+[entry]
+    meta = ["date", "categories", "tags"]

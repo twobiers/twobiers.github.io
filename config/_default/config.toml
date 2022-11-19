@@ -1,0 +1,32 @@
+languageCode = "en-us"
+title = "twobiers"
+defaultcontentlanguage = "en"
+
+paginate = 20
+
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+enableRobotsTXT = true
+
+[Author]
+  name = "Tobi"
+  bio = "🥒"
+  image = "img/avatar.jpg"
+  links = [
+    { github = "https://github.com/twobiers" },
+    { spotify = "https://open.spotify.com/rchhnd4" }
+  ]
+
+[outputFormats]
+  [outputFormats.MANIFEST]
+    mediaType = "application/json"
+    baseName = "manifest"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "MANIFEST"]
+
+[frontmatter]
+	date = [":filename", ":default", ":fileModTime"]
