@@ -1,4 +1,3 @@
-baseURL = 'https://twobiers.github.io/'
 languageCode = "en-us"
 title = "Twobiers"
 theme = "binario"
