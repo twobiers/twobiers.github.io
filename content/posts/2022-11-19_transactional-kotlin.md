@@ -75,7 +75,7 @@ Source: [Java EE @Transactional Annotation](https://docs.oracle.com/javaee/7/api
 
 Easy. Everything should be rolled back as [Kotlin doesn't have checked exceptions at all](https://kotlinlang.org/docs/exceptions.html) we're good to go.
 
-![Well yes, but actually no meme](https://i.kym-cdn.com/entries/icons/original/000/028/596/dsmGaKWMeHXe9QuJtq_ys30PNfTGnMsRuHuo_MUzGCg.jpg)
+![Futurama not sure if meme](https://i.kym-cdn.com/entries/icons/original/000/006/026/NOTSUREIF.jpg)
 
 Let's take a closer look at the previous javadoc.
 
@@ -109,8 +109,6 @@ fun joinGame(gameId: UUID, playerId: UUID) {
 3. Customize the spring transaction manager.
 
 An issue tracking this on the Spring Framework can be found here: [https://github.com/spring-projects/spring-framework/issues/23473](https://github.com/spring-projects/spring-framework/issues/23473)
-
-Comments here: [https://github.com/twobiers/twobiers.github.io/issues/1](https://github.com/twobiers/twobiers.github.io/issues/1)
 
 P.S.: Technically, I lied in this post. I've experienced the issue in another part of the code, 
 but I find the join semantics and code is a better fit for explaining the context as it 
