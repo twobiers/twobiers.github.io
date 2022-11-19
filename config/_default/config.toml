@@ -15,7 +15,7 @@ enableRobotsTXT = true
   image = "img/avatar.jpg"
   links = [
     { github = "https://github.com/twobiers" },
-    { spotify = "https://open.spotify.com/rchhnd4" }
+    { spotify = "https://open.spotify.com/twobiers" }
   ]
 
 [outputFormats]
