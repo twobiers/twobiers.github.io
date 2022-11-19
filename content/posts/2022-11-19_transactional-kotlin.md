@@ -11,16 +11,16 @@ showTableOfContents = false
 issueId = 1
 +++
 
-Recently, I've worked with a Spring Boot project written Kotlin, 
-which had unexplainable strange behaviour by just looking at the code.
-Specifically, it is a game within a microservice architecture that is being 
-developed as part of a course.
+Recently, I've worked with a Spring Boot project written Kotlin.
+It had a bug which was unexplainable to me by just looking at the code.
+This project is a service within a microservice architecture that is being 
+developed as part of a course (Look [here](https://www.archi-lab.io/compounds/dungeon_main.html) for details).
 
 One of the services is the so called "Game service" which is responsible for
 managing the state of the game and letting players (which are services by themselves)
 join a game.
-Once a player has joined a game, a asynchronous communication channel is created for the
-player as we tend to develop the service landscape in an event-driven architecture.
+Once a player has joined a game, an asynchronous communication channel is created for the
+player as we tend to develop the service landscape in an event-driven style.
 The code for this process looks similar to the following (Some parts are omitted and 
 simplified for brevity):
 ```kt
