@@ -1,0 +1,132 @@
+<!doctype html><html class=no-js lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#1b1b1b"><title>The `@Transactional`-Kotlin Mismatch | Twobiers</title><script>(function(e,t){e[t]=e[t].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="How to make your productive environment inconsistent with a single exception"><link rel=stylesheet href=/css/bundle.css><link rel=icon href=/icons/16.png sizes=16x16 type=image/png><link rel=icon href=/icons/32.png sizes=32x32 type=image/png><link rel=manifest href=/manifest.json></head><body class="body kind-page"><header class=header><a class=logo href=/>Twobiers</a><nav class=main-nav role=navigation><button id=toggle class=main-nav__btn aria-label="Menu toggle" aria-expanded=false tabindex=0><div class=main-nav__btn-box tabindex=-1><svg class="main-nav__icon icon-menu" width="18" height="18" viewBox="0 0 18 18"><path class="icon-menu__burger" d="M18 0v3.6H0V0h18zM0 10.8h18V7.2H0v3.6zM0 18h18v-3.6H0V18z"/><path class="icon-menu__x" d="M11.55 9 18 15.45 15.45 18 9 11.55 2.55 18 0 15.45 6.45 9 0 2.55 2.55.0 9 6.45 15.45.0 18 2.55 11.55 9z"/></svg></div></button><ul id=menu class=main-nav__list><li class=main-nav__item><a class=main-nav__link href=/posts><span class=main-nav__text>Blog</span></a></li><li class=main-nav__item><a class=main-nav__link href=/about><span class=main-nav__text>About</span></a></li></ul></nav></header><div class=primary><main class=main><nav class="breadcrumb block" aria-label=breadcrumb><ol class=breadcrumb__list><li class=breadcrumb__item><a class=breadcrumbs__link href=/>Twobiers</a></li><li class=breadcrumb__item><a class=breadcrumbs__link href=/posts/>Blog</a></li><li class="breadcrumbs__item breadcrumb__item--active" aria-current=page>The `@Transactional`-Kotlin Mismatch</li></ol></nav><div class="single block"><article class=entry><div class="entry__meta meta mb"><time class="entry__meta-published meta-published" datetime=2022-11-19T00:00:00Z>November 19, 2022</time><div class="entry__meta-tags meta-tags"><span class=meta-tags__list>Tags:
+<a class=meta-tags__link href=/%20tags/java/ rel=tag>java</a>,
+<a class=meta-tags__link href=/%20tags/kotlin/ rel=tag>kotlin</a>,
+<a class=meta-tags__link href=/%20tags/spring-boot/ rel=tag>spring-boot</a></span></div></div><h1 class=entry__title>The `@Transactional`-Kotlin Mismatch</h1><div class=entry__content><p>Recently, I&rsquo;ve worked with a Spring Boot project written Kotlin,
+which had unexplainable strange behaviour by just looking at the code.
+Specifically, it is a game within a microservice architecture that is being
+developed as part of a course.</p><p>One of the services is the so called &ldquo;Game service&rdquo; which is responsible for
+managing the state of the game and letting players (which are services by themselves)
+join a game.
+Once a player has joined a game, a asynchronous communication channel is created for the
+player as we tend to develop the service landscape in an event-driven architecture.
+The code for this process looks similar to the following (Some parts are omitted and
+simplified for brevity):</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kt data-lang=kt><span style=display:flex><span>@Service
+</span></span><span style=display:flex><span><span style=font-weight:700>class</span> <span style=font-weight:700>GameService</span> {
+</span></span><span style=display:flex><span>    @Transactional
+</span></span><span style=display:flex><span>    <span style=font-weight:700>fun</span> joinGame(gameId: UUID, playerId: UUID) {
+</span></span><span style=display:flex><span>        <span style=font-weight:700>val</span> player = playerRepository.findById(playerId).orElseThrow()
+</span></span><span style=display:flex><span>        <span style=font-weight:700>val</span> game = gameRepository.findById(gameId).orElseThrow()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        game.joinGame(player)
+</span></span><span style=display:flex><span>        playerQueueManager.setupPlayerQueue(playerId)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        gameRepository.save(game)
+</span></span><span style=display:flex><span>    }    
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Seems fine, right? A player joins a game, the exchange is being created and afterwards
+the modified game with the joined player is saved. What could go wrong?
+Well, the <code>setupPlayerQueue()</code> call can throw an exception. Let&rsquo;s assume it throws a
+<code>QueueCreationException</code> if something goes wrong (e.g. broker not available).
+The exception inherits from the <code>kotlin.Exception</code> type.
+So what would happen if the message broker is unavailable? I guess everyone would aggree
+with me, If It would make perfectly sense If a player invoking this method other RPC would
+get an error message back and should eventually be able to join the game at a later point
+of time when the broker is available again.</p><p><img src=https://i.kym-cdn.com/entries/icons/original/000/028/596/dsmGaKWMeHXe9QuJtq_ys30PNfTGnMsRuHuo_MUzGCg.jpg alt="Well yes, but actually no meme"></p><p>The player is not able to join the game again. Why? because the <code>joinGame(player)</code> method
+will check whether the player is already participating in the game and will throw an exception if so.
+You might wonder why the player would be participating in the game. I mean, we didn&rsquo;t
+come to invoking the <code>save()</code> method at all.
+Well, if you are using a JPA EntityManager within a transaction scope, it isn&rsquo;t required
+invoking <code>save()</code> on a repository at all. Once the transaction scope is completed, the EntityManager
+takes care of persisting any changed entity.</p><p>Okay, but why would the EntityManager even persist the changed entity? I mean, we have thrown a
+exception. Shouldn&rsquo;t the transaction be marked for rollback? Clearly it should. RTFM!</p><blockquote><p>If no custom rollback rules are configured in this annotation,
+<strong>the transaction will roll back on <code>RuntimeException</code> and <code>Error</code> but not on checked exceptions</strong>.</p></blockquote><p>Source: <a href=https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html>Spring @Transactional Annotation</a></p><blockquote><p>By default checked exceptions do not result in the transactional interceptor
+marking the transaction for rollback and instances of RuntimeException and its
+subclasses do. This default behavior can be modified by specifying exceptions
+that result in the interceptor marking the transaction for rollback and/or
+exceptions that do not result in rollback.</p></blockquote><p>Source: <a href=https://docs.oracle.com/javaee/7/api/javax/transaction/Transactional.html>Java EE @Transactional Annotation</a></p><p>Easy. Everything should be rolled back as <a href=https://kotlinlang.org/docs/exceptions.html>Kotlin doesn&rsquo;t have checked exceptions at all</a> we&rsquo;re good to go.</p><p><img src=https://i.kym-cdn.com/entries/icons/original/000/028/596/dsmGaKWMeHXe9QuJtq_ys30PNfTGnMsRuHuo_MUzGCg.jpg alt="Well yes, but actually no meme"></p><p>Let&rsquo;s take a closer look at the previous javadoc.</p><blockquote><p>By default checked exceptions do not result in the transactional interceptor
+marking the transaction for rollback <strong>and instances of RuntimeException and its</strong>
+<strong>subclasses do.</strong></p></blockquote><p>And here&rsquo;s the cause of the problem. The Kotlin compiler &ldquo;bridges&rdquo; the type <code>kotlin.Exception</code>
+to <code>java.lang.Exception</code> resulting in all exceptions being effectively checked exceptions during
+runtime. This design decision is quite understandable, especially when thinking about the
+interoperability between Kotlin and Java.</p><p>However, let&rsquo;s think about the consequences. <strong>No thrown Exception of type <code>kotlin.Exception</code></strong>
+<strong>within a method marked as <code>@Transactional</code> will result in a rollback by default</strong>.
+And there is even more to it. You wouldn&rsquo;t even notice the issue in your integration tests, because
+test transactions are rolled back by default. It will work fine in tests and crash in
+production. By Design. Nice!</p><p>In my opionion this is a huge mismatch and I bet that this behavior will cause more bugs like this.</p><p>So what can I do to</p><ol><li>Don&rsquo;t use the <code>kotlin.Exception</code> type, use <code>java.lang.RuntimeException</code> instead.
+(I guess nobody will do that in a kotlin project)</li><li>Explicitly add the <code>kotlin.Exception</code> type to the <code>@Transactional</code> annotation
+(This is what I did)</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kt data-lang=kt><span style=display:flex><span>@Transactional(rollbackOn = [Exception::<span style=font-weight:700>class</span>])
+</span></span><span style=display:flex><span><span style=font-weight:700>fun</span> joinGame(gameId: UUID, playerId: UUID) {
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>Customize the spring transaction manager.</li></ol><p>An issue tracking this on the Spring Framework can be found here: <a href=https://github.com/spring-projects/spring-framework/issues/23473>https://github.com/spring-projects/spring-framework/issues/23473</a></p><p>Comments here: <a href=https://github.com/twobiers/twobiers.github.io/issues/1>https://github.com/twobiers/twobiers.github.io/issues/1</a></p><p>P.S.: Technically, I lied in this post. I&rsquo;ve experienced the issue in another part of the code,
+but I find the join semantics and code is a better fit for explaining the context as it
+is more accessible.</p><h1 id=appendix>Appendix</h1><p>Here is a test case validating my statements:</p><p><strong>JavaRuntimeException.java</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=font-style:italic>// JavaRuntimeException.java
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=font-weight:700>public</span> <span style=font-weight:700>class</span> <span style=font-weight:700>JavaRuntimeException</span> <span style=font-weight:700>extends</span> RuntimeException {
+</span></span><span style=display:flex><span>    <span style=font-weight:700>public</span> JavaRuntimeException() {
+</span></span><span style=display:flex><span>        <span style=font-weight:700>super</span>(<span style=font-style:italic>&#34;This is a Java runtime exception&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>KotlinException.kt</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=font-weight:700>class</span> <span style=font-weight:700>KotlinException</span> : Exception(<span style=font-style:italic>&#34;This is a Kotlin exception&#34;</span>) {
+</span></span><span style=display:flex><span>    <span style=font-weight:700>override</span> <span style=font-weight:700>val</span> message: String
+</span></span><span style=display:flex><span>        <span style=font-weight:700>get</span>() = <span style=font-style:italic>&#34;This is a Kotlin exception&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>TransactionExceptionTest.kt</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span>@SpringBootTest
+</span></span><span style=display:flex><span>@Import(TransactionExceptionTest.TestService::<span style=font-weight:700>class</span>)
+</span></span><span style=display:flex><span>@Transactional
+</span></span><span style=display:flex><span><span style=font-weight:700>class</span> <span style=font-weight:700>TransactionExceptionTest</span> {
+</span></span><span style=display:flex><span>    @Component
+</span></span><span style=display:flex><span>    <span style=font-weight:700>class</span> <span style=font-weight:700>TestService</span> {
+</span></span><span style=display:flex><span>        @Transactional
+</span></span><span style=display:flex><span>        <span style=font-weight:700>fun</span> throwKotlin() {
+</span></span><span style=display:flex><span>            <span style=font-weight:700>val</span> e = KotlinException()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            println(e.javaClass.superclass)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=font-weight:700>throw</span> e
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        @Transactional
+</span></span><span style=display:flex><span>        <span style=font-weight:700>fun</span> throwJava() {
+</span></span><span style=display:flex><span>            <span style=font-weight:700>val</span> e = JavaRuntimeException()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            println(e.javaClass.superclass)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=font-weight:700>throw</span> e
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    <span style=font-weight:700>lateinit</span> <span style=font-weight:700>var</span> testService: TestService
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    <span style=font-weight:700>lateinit</span> <span style=font-weight:700>var</span> tm: PlatformTransactionManager
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    <span style=font-weight:700>lateinit</span> <span style=font-weight:700>var</span> td: TransactionDefinition
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Test
+</span></span><span style=display:flex><span>    <span style=font-weight:700>fun</span> testKotlinTransaction() {
+</span></span><span style=display:flex><span>        <span style=font-weight:700>val</span> transaction = tm.getTransaction(td)
+</span></span><span style=display:flex><span>        assert(!transaction.isRollbackOnly)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        assertThrows&lt;Exception&gt; {
+</span></span><span style=display:flex><span>            testService.throwKotlin()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        assert(transaction.isRollbackOnly)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Test
+</span></span><span style=display:flex><span>    <span style=font-weight:700>fun</span> testJavaTransaction() {
+</span></span><span style=display:flex><span>        <span style=font-weight:700>val</span> transaction = tm.getTransaction(td)
+</span></span><span style=display:flex><span>        assert(!transaction.isRollbackOnly)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        assertThrows&lt;Exception&gt; {
+</span></span><span style=display:flex><span>            testService.throwJava()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        assert(transaction.isRollbackOnly)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div><footer class=entry__footer><div class=entry__tags><a class="entry__tag btn" href=/tags/java/>java</a>
+<a class="entry__tag btn" href=/tags/kotlin/>kotlin</a>
+<a class="entry__tag btn" href=/tags/spring-boot/>spring-boot</a></div></footer></article></div></main></div><footer class=footer><div class="footer__social social"><a class=social__link target=_blank rel="noopener noreferrer" href=https://github.com/twobiers><svg class="social__icon" aria-label="Github" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg></a><a class=social__link target=_blank rel="noopener noreferrer" href=https://open.spotify.com/user/rchhnd4><svg class="social__icon" aria-label="Spotify" role="img" width="32" height="32" viewBox="0 0 512 512"><path d="M255.83871.277C114.68562.277.253 114.70657.253 255.85966c0 141.1592 114.43262 255.57961 255.58571 255.57961 141.16836.0 255.58876-114.42041 255.58876-255.57961.0-141.14394-114.4204-255.5704519-255.59181-255.5704519zm117.20996 368.62355c-4.57804 7.50798-14.40556 9.88856-21.91354 5.28001-60.00891-36.65482-135.55263-44.95633-224.51915-24.62984-8.57314 1.95329-17.1188-3.41827-19.0721-11.99446-1.96245-8.57619 3.38775-17.12186 11.98225-19.07516 97.35959-22.25231 180.87214-12.6659 248.24254 28.50592 7.50798 4.60855 9.88856 14.40555 5.28 21.91353zm31.28326-69.60142c-5.76833 9.38497-18.03747 12.34544-27.40719 6.57711-68.70108-42.23697-173.4252-54.46643-254.68536-29.79997-10.53864 3.18326-21.66938-2.75598-24.867899-13.27631-3.174106-10.53864 2.768189-21.64801 13.288519-24.85263 92.82123-28.16409 208.21523-14.52154 287.11007 33.95988 9.36972 5.76832 12.33018 18.03746 6.56186 27.39497zm2.68578-72.46728c-82.37415-48.92701-218.28082-53.42569-296.92844-29.55581C97.459989 201.10633 84.104329 193.9768 80.27709 181.34753c-3.827239-12.63539 3.296187-25.98189 15.934621-29.82134 90.281949-27.40718 240.365269-22.11192 335.203879 34.18878 11.38406 6.74193 15.10753 21.41301 8.36255 32.75739-6.71445 11.35963-21.42521 15.10447-32.74822 8.35949z" id="path2" style="stroke-width:3.05202"/></svg></a></div><div class=footer__copyright>© 2022 Twobiers. <span class=footer__copyright-credits>Powered by <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> and <a href=https://github.com/vimux/binario rel="nofollow noopener" target=_blank>Binario</a> theme.</span></div></footer><script src=/js/menu.js></script></body></html>
