@@ -2,6 +2,7 @@
 draft = false
 title = "The @Transactional-Kotlin Mismatch"
 description = "How to make your productive environment inconsistent with a single exception"
+summary = "The JEE/Spring @Transactional Annotation in Kotlin behaves unintuitively when exceptions are thrown and does not rollback by default"
 tags = [
     "java",
     "kotlin",

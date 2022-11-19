@@ -1,6 +1,10 @@
 ---
 title: "Blog"
 description: "Place I write stupid stuff"
+
+cascade:
+  showEdit: false
+  showSummary: true
 ---
 
 As the description already mentions, this is the place where I write 

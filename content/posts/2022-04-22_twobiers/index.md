@@ -1,7 +1,8 @@
 +++ 
 draft = false
-title = "Twobiers"
+title = "twobiers"
 description = "The meaning behind twobiers"
+summary = "Why twobiers?"
 +++
 
 There is a german joke:

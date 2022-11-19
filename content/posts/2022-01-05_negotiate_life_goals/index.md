@@ -2,9 +2,7 @@
 draft = false
 title = "Is The Negation Of Life Goals The Key To Success?"
 description = "Setting upper bounds for failures"
-tags = [
-    "quick think"
-]
+summary = "Setting upper bounds for failures instead of success goals might improve your mindset"
 date = "2022-01-05"
 +++
 
