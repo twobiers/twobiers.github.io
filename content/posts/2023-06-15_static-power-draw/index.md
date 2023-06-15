@@ -1,6 +1,8 @@
 +++ 
 draft = false
 title = "Do You Know the Power Intake of Your Computer?"
+description = "The power draw of your computer might be lesser than you think"
+summary = "I've measured the power draw of my computer and noticed that it only demands about 35W in idle and about 100W if doing CPU-heavy work"
 showTableOfContents = false
 issueId = 2
 +++
@@ -19,7 +21,7 @@ For reference my setup consists of the following parts:
 On a fresh Ubuntu Server 22.10 installation I measured exactly 33W power draw during idle mode. The facinating thing was that even when I pushed the CPU to the limit, I've barley surpassed a power draw of 100W.[^2]
 
 This means, that it would be easily possible to power my computer with a single solar module assuming a pessimistic watt peak of 100W (A quick google search told me that a [350 watt peak is possible to achieve with a single module](https://www.gasag.de/magazin/nachhaltig/photovoltaik-leistung-ermitteln)). 
-Even accounting that I only measured the power draw of my computer ignoring the displays and periphery I find this kinda astonishing.
+Even accounting that I only measured the power draw of my computer ignoring the displays and periphery and ignoring a typical workload I find this kinda astonishing.
 
 [^1]: In the thesis I'm using the energy consumption of a computer system as an approximation for carbon emissions. Maybe I get more in the detail in a later post.
 [^2]: I measured how the power draw behaves when I push certain components to the limit. The result is kinda interesting and I will probably post about it once all formalities regarding my thesis are done. 
