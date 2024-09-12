@@ -10,6 +10,6 @@ I don't like the ticks around inline code, so I remove them
 }
 
 .prose.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
+    padding-left: 1ch;
+    padding-right: 1ch;
 }
