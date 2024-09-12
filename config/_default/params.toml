@@ -1,6 +1,8 @@
 description = "Web Page Of Stupid Random Stuff"
 homepage.layout = "profile"
 
+colorScheme = "cherry"
+
 [article]
     showComments = true
 
