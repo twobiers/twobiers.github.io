@@ -2,8 +2,6 @@ languageCode = "en-us"
 title = "twobiers"
 defaultcontentlanguage = "en"
 
-paginate = 20
-
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
@@ -17,6 +15,9 @@ enableRobotsTXT = true
     { github = "https://github.com/twobiers" },
     { spotify = "https://open.spotify.com/twobiers" }
   ]
+
+[pagination]
+  pagerSize = 20
 
 [outputFormats]
   [outputFormats.MANIFEST]
