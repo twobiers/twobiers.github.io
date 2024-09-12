@@ -9,7 +9,7 @@ pygmentscodefencesguesssyntax = true
 
 enableRobotsTXT = true
 
-[Author]
+[params.author]
   name = "Tobi"
   bio = "🥒"
   image = "img/avatar.jpg"
