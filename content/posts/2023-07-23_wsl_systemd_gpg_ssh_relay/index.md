@@ -7,6 +7,9 @@ issueId = 3
 In this post I will explain how I'm using the Windows OpenSSH and Gpg4Win agents inside WSL2 with systemd.
 This post is not explained in detail and serves mainly as a reference manual for future setups.
 
+There are also other tools available in the wild, that help with the process, like:
+- [wsl-gpg-systemd](https://github.com/demonbane/wsl-gpg-systemd)
+
 Download [npiperelay](https://github.com/NZSmartie/npiperelay) and [wsl-ssh-pageant](https://github.com/benpye/wsl-ssh-pageant).
 Place both in a suitable directory on the windows side. I created `C:\tools` for that purpose.
 Configure wsl-ssh-pageant for autostart. I chose a simple shortcut in the startup directory for that.
