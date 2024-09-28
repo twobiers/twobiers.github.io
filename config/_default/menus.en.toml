@@ -7,8 +7,3 @@
   name = "Random"
   weight = 2
   url = "/random"
-
-[[main]]
-  name = "About"
-  weight = 3
-  url = "/about"
