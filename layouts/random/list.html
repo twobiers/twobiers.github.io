@@ -1,18 +1,18 @@
 {{ define "main" }}
-  <section class="mt-8">
+  <section id="sec-random-pages" class="mt-8">
     {{ range .Pages }}
-      <section class="pb-6">
+      <article class="pb-6">
         <a class="flex">
           <div>
             <h3 class="flex text-xl font-semibold">
               {{ .Date | time.Format "2006-01-02" }}
             </h3>
             <p class="text-sm text-neutral-400">
-              {{ .Content }}
+              {{ .Content | emojify }}
             </p>
           </div>
         </a>
-      </section>
+      </article>
     {{ end }}
   </section>
 {{ end }}
