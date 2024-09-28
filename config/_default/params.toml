@@ -9,3 +9,5 @@ dateFormat = "2006-02-01"
 
 [entry]
     meta = ["date", "categories", "tags"]
+
+enableCodeCopy = true
