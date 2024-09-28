@@ -7,17 +7,22 @@ Parameters:
 -->
 
 {{ if .IsNamedParams }}
-<iframe src="https://open.spotify.com/embed/{{ .Get "type" }}/{{ .Get "id" }}"
+<iframe src="https://open.spotify.com/embed/{{ .Get " type" }}/{{ .Get "id" }}?theme=0"
     width="{{ default "100%" (.Get "width") }}"
     height="{{ default "380" (.Get "height") }}"
     frameborder="0"
     allowtransparency="true"
-    allow="encrypted-media"></iframe>
+    allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+    ></iframe>
 {{ else }}
-<iframe src="https://open.spotify.com/embed/{{ .Get 0 }}/{{ .Get 1 }}"
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/{{ .Get 0 }}/{{ .Get 1 }}?theme=0"
     width="{{ default "100%" (.Get 2) }}"
     height="{{ default "380" (.Get 3) }}"
     frameborder="0"
     allowtransparency="true"
-    allow="encrypted-media"></iframe>
+    allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+    >
+</iframe>
 {{ end }}
