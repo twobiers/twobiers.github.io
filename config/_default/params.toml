@@ -2,6 +2,7 @@ description = "Web Page Of Stupid Random Stuff"
 homepage.layout = "profile"
 
 colorScheme = "cherry"
+dateFormat = "2006-02-01"
 
 [article]
     showComments = true
