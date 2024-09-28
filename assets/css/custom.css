@@ -14,6 +14,10 @@ I don't like the ticks around inline code, so I remove them
     padding-right: 1ch;
 }
 
+/* ugly workaround, because I'm too stupid to fix the selector above */
+.prose :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding: 0 !important;
+}
 #sec-random-pages article ul {
     list-style-type: none;
     padding: 0;
