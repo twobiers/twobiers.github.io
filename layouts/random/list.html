@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <section class="mt-8">
+    {{ range .Pages }}
+      <section class="pb-6">
+        <a class="flex">
+          <div>
+            <h3 class="flex text-xl font-semibold">
+              {{ .Date | time.Format "2006-01-02" }}
+            </h3>
+            <p class="text-sm text-neutral-400">
+              {{ .Content }}
+            </p>
+          </div>
+        </a>
+      </section>
+    {{ end }}
+  </section>
+{{ end }}
