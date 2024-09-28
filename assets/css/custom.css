@@ -14,8 +14,12 @@ I don't like the ticks around inline code, so I remove them
     padding-right: 1ch;
 }
 
+#sec-random-pages article ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 #sec-random-pages article li {
     background-color: rgba(var(--color-neutral-900), 0.9);
     padding: 1em;
-    margin: 1em 0;
 }

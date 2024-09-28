@@ -7,9 +7,11 @@
             <h3 class="flex text-xl font-semibold">
               {{ .Date | time.Format "2006-01-02" }}
             </h3>
-            <p class="text-sm text-neutral-400">
+            <div class="prose dark:prose-invert">
+              <p class="text-sm text-neutral-400">
               {{ .Content | emojify }}
-            </p>
+              </p>
+            </div>
           </div>
         </a>
       </article>
