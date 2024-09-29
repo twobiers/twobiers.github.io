@@ -1,6 +1,7 @@
+---
+title: "twobiers"
+---
 
-Hi, I'm Tobi. Well, also I'm Arno, Walter, Hans, Starney - way to many pseudonyms 
-on the web. 
-
-On this page I want to manifest my personality, try some new creative things and 
-train writing skills. 
+{{<lead>}}
+Hi, I’m Tobi. I'm a Software Engineer based in Germany. I care about way too many things including programming languages, software architecture, engineering culture and basically everything which catches my interest.  :eagle:
+{{</lead>}}
