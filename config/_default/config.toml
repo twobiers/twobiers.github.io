@@ -7,15 +7,6 @@ pygmentscodefencesguesssyntax = true
 
 enableRobotsTXT = true
 
-[params.author]
-  name = "Tobi"
-  bio = "🥒"
-  image = "img/avatar.jpg"
-  links = [
-    { github = "https://github.com/twobiers" },
-    { spotify = "https://open.spotify.com/twobiers" }
-  ]
-
 [pagination]
   pagerSize = 20
 

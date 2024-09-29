@@ -4,6 +4,15 @@ homepage.layout = "profile"
 colorScheme = "avocado"
 dateFormat = "2006-02-01"
 
+[author]
+  name = "Tobi"
+  bio = "🥒"
+  image = "img/avatar.jpg"
+  links = [
+    { github = "https://github.com/twobiers" },
+    { spotify = "https://open.spotify.com/twobiers" }
+  ]
+
 [article]
     showComments = true
 
