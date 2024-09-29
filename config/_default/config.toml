@@ -1,5 +1,6 @@
 languageCode = "en-us"
 title = "twobiers"
+theme = "congo"
 defaultcontentlanguage = "en"
 
 pygmentscodefences = true
