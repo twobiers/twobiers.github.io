@@ -1,0 +1,30 @@
+name: Fetch posts from supernotes
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  fetch-random:
+    runs-on: ubuntu-latest
+
+    env:
+      SUPERNOTES_API_KEY: ${{ secrets.SUPERNOTES_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Fetch posts
+        run: ./hack/fetch-random-from-supernotes.sh
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/random
+          git commit -m "Fetch random posts from supernotes"
+          git push
