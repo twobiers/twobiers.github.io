@@ -26,13 +26,8 @@ response=$(curl --request GET \
     --header "Api-Key: $SUPERNOTES_API_KEY" \
     --header 'Content-Type: application/json')
 
-# the response is an array, check if array is empty
-if [ "$(echo "$response" | jq '[]')" == "[]" ]; then
-    echo "No deleted cards found."
-    exit 0
-fi
-
 # iterate over response array
 for row in $(echo "$response" | jq -r '.[] | @base64'); do
-    rm -f "$script_path/../content/random/*_$(echo "$row" | base64 --decode).html"
+    uuid=$(echo "$row" | base64 --decode)
+    find "$script_path/../content/random" -type f -name "*_$uuid.html" -exec rm -f {} +
 done
