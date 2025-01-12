@@ -5,6 +5,10 @@ on:
     branches:
       - main  # Set a branch to deploy
   pull_request:
+  workflow_run: 
+    workflows: ["Fetch posts from supernotes"]
+    types:
+      - completed
 
 jobs:
   build:
