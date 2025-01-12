@@ -89,18 +89,18 @@ for row in $(echo "$response" | jq -Rnr '[inputs] | join("\\n") | fromjson | to_
     }
 
     title=$(_jq '.value.data.name')
-    html=$(_jq '.value.data.html')
+    markdown=$(_jq '.value.data.markup')
     id=$(_jq '.value.data.id')
     tags=$(_jq '.value.data.tags | map(select(. != "blog" and . != "random"))')
     created_when=$(_jq '.value.data.created_when')
 
-    file="$script_path/../content/random/$(echo "$created_when" | cut -dT -f1)_${id}.html"
+    file="$script_path/../content/random/$(echo "$created_when" | cut -dT -f1)_${id}.md"
     echo "---" >"${file}"
     echo "title: \"${title}\"" >>"${file}"
     echo "tags: ${tags}" >>"${file}"
     echo "date: \"${created_when}\"" >>"${file}"
     echo "---" >>"${file}"
-    echo "${html}" >>"${file}"
+    echo "${markdown}" >>"${file}"
 done
 
 echo "New blog posts fetched successfully."
