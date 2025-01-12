@@ -91,7 +91,7 @@ for row in $(echo "$response" | jq -Rnr '[inputs] | join("\\n") | fromjson | to_
     title=$(_jq '.value.data.name')
     html=$(_jq '.value.data.html')
     id=$(_jq '.value.data.id')
-    tags=$(_jq '.value.data.tags')
+    tags=$(_jq '.value.data.tags | map(select(. != "blog" and . != "random"))')
     created_when=$(_jq '.value.data.created_when')
 
     file="$script_path/../content/random/$(echo "$created_when" | cut -dT -f1)_${id}.html"
