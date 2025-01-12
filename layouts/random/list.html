@@ -1,11 +1,14 @@
 {{ define "main" }}
   <section id="sec-random-pages" class="mt-8">
-    {{ range .Pages }}
+    {{ range .Pages.GroupByDate "2006-01-02" }}
+    <div>
+        <h3 class="flex text-xl font-semibold">
+            {{ .Key | time.Format "2006-01-02" }}
+        </h3>
+      </div>
+      {{ range .Pages.ByDate }}
       <article class="pb-6">
         <div>
-        <h3 class="flex text-xl font-semibold">
-            {{ .Date | time.Format "2006-01-02" }}
-        </h3>
         <div class="prose dark:prose-invert">
             <p class="text-sm text-neutral-400">
             {{ .Content | emojify }}
@@ -13,6 +16,7 @@
         </div>
         </div>
       </article>
+      {{ end }}
     {{ end }}
   </section>
 {{ end }}
