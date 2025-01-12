@@ -3,7 +3,13 @@ name: Fetch posts from supernotes
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Number of days to fetch'
+        required: false
+        default: 1
+        type: number
 
 jobs:
   fetch-random:
@@ -19,7 +25,8 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch posts
-        run: ./hack/fetch-random-from-supernotes.sh
+        run: |
+          ./hack/fetch-random-from-supernotes.sh "${{ github.event.inputs.days || 1 }}"
 
       - name: Commit and push
         run: |

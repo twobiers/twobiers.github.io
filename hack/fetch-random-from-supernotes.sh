@@ -20,7 +20,19 @@ if ! command -v curl &>/dev/null; then
     exit 1
 fi
 
+number_of_days=$1
+if [ -z "$number_of_days" ]; then
+    echo "No parameter passed, defaulting to 1 day."
+    number_of_days="1"
+fi
+if ! [[ "$number_of_days" =~ ^[0-9]+$ ]]; then
+    echo "Invalid parameter passed, please pass a number."
+    exit 1
+fi
+
 current_time=$(date -u --iso-8601=second | sed s/+00:00/Z/ | sed s/,/./)
+yesterday_time=$(date -u -d "-$number_of_days days" --iso-8601=second | sed s/+00:00/Z/ | sed s/,/./)
+
 yesterday_time=$(date -u -d "yesterday" --iso-8601=second | sed s/+00:00/Z/ | sed s/,/./)
 # Curl API Call and check if status is 200
 response=$(curl --request POST \
