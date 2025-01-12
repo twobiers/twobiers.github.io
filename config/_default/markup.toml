@@ -2,6 +2,10 @@
 [goldmark.renderer]
   unsafe = true
 
+[goldmark.extensions]
+[goldmark.extensions.extras.mark]
+  enable = true
+
 [highlight]
   noClasses = false
 
