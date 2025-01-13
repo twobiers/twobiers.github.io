@@ -8,12 +8,19 @@
       </div>
       {{ range .Pages.ByDate }}
       <article class="pb-6">
-        <div>
         <div class="prose dark:prose-invert">
-            <p class="text-sm text-neutral-400">
+          <p class="text-sm text-neutral-400">
             {{ .Content | emojify }}
-            </p>
-        </div>
+          </p>
+          <ul>
+            {{ range .Params.Tags }}
+            <li class="inline-block mr-2">
+              <a href="/tags/{{ . | urlize }}" class="text-sm text-neutral-400 hover:text-neutral-600">
+                {{ . }}
+              </a>
+            </li>
+            {{ end }}
+          </ul>
         </div>
       </article>
       {{ end }}
