@@ -92,6 +92,7 @@ for row in $(echo "$response" | jq -Rnr '[inputs] | join("\\n") | fromjson | to_
     created_when=$(_jq '.value.data.created_when')
 
     file="$script_path/../content/random/$(echo "$created_when" | cut -dT -f1)_${id}.md"
+    echo "Creating file: ${file}"
     echo "---" >"${file}"
     echo "title: \"${title}\"" >>"${file}"
     echo "tags: ${tags}" >>"${file}"

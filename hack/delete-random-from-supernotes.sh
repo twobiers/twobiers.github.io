@@ -29,5 +29,6 @@ response=$(curl --request GET \
 # iterate over response array
 for row in $(echo "$response" | jq -r '.[] | @base64'); do
     uuid=$(echo "$row" | base64 --decode)
+    echo "Deleting $uuid"
     find "$script_path/../content/random" -type f -name "*_$uuid.md" -exec rm -f {} +
 done
