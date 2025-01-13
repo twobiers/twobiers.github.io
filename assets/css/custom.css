@@ -19,6 +19,14 @@ I don't like the ticks around inline code, so I remove them
     padding: 0 !important;
 }
 
+/* Currently, I don't like the default width from Congo, so I increase the max-width */
+.max-w-prose {
+    max-width: 120ch;
+}
+
+.prose {
+    max-width: 120ch;
+}
 #sec-random-pages article .prose {
     background-color: rgba(var(--color-neutral-900), 0.9);
     padding: 1em;
