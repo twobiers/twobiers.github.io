@@ -34,8 +34,8 @@ jobs:
 
       - name: Commit and push
         run: |
-          git diff --quiet HEAD $REF -- content/random
-          if [ $? -ne 1 ];
+          git diff --quiet HEAD -- content/random
+          if [ $? -ne 1 ]; then
             echo "No changes to commit"
             exit 0
           fi
