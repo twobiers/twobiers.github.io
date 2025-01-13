@@ -34,6 +34,12 @@ jobs:
 
       - name: Commit and push
         run: |
+          git diff --quiet HEAD $REF -- content/random
+          if [ $? -ne 1 ];
+            echo "No changes to commit"
+            exit 0
+          fi
+          
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add content/random
