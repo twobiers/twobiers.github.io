@@ -34,8 +34,7 @@ jobs:
 
       - name: Commit and push
         run: |
-          git diff --quiet HEAD -- content/random
-          if [ $? -ne 1 ]; then
+          if [ -z "$(git status --porcelain=v1 2>/dev/null -- content/random)" ]; then
             echo "No changes to commit"
             exit 0
           fi
