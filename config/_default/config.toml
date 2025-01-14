@@ -21,4 +21,4 @@ enableRobotsTXT = true
   home = ["HTML", "RSS", "MANIFEST"]
 
 [frontmatter]
-	date = [":filename", ":default", ":fileModTime"]
+	date = [":default", ":filename", ":fileModTime"]
