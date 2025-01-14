@@ -85,7 +85,7 @@ for row in $(echo "$response" | jq -Rnr '[inputs] | join("\\n") | fromjson | to_
         echo "${row}" | base64 --decode | jq -r "${1}"
     }
 
-    title=$(_jq '.value.data.name')
+    title=$(_jq '.value.data.name // "Untitled"')
     markdown=$(_jq '.value.data.markup')
     id=$(_jq '.value.data.id')
     tags=$(_jq '.value.data.tags | map(select(. != "blog" and . != "random"))')
