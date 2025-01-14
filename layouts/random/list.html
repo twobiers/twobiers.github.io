@@ -6,7 +6,7 @@
             {{ .Key | time.Format "2006-01-02" }}
         </h3>
       </div>
-      {{ range .Pages.ByDate }}
+      {{ range .Pages.ByDate.Reverse }}
       <article class="pb-6">
         <div class="prose dark:prose-invert">
           <p class="text-sm text-neutral-400">
