@@ -90,6 +90,13 @@ for row in $(echo "$response" | jq -Rnr '[inputs] | join("\\n") | fromjson | to_
     id=$(_jq '.value.data.id')
     tags=$(_jq '.value.data.tags | map(select(. != "blog" and . != "random"))')
     created_when=$(_jq '.value.data.created_when')
+    targeted_when=$(_jq '.value.data.targeted_when')
+
+    created_date=$(date -d "$created_when" +%s)
+    targeted_date=$(date -d "$targeted_when" +%s)
+    if [ "$created_date" -gt "$targeted_date" ]; then
+        created_when=$targeted_when
+    fi
 
     file="$script_path/../content/random/$(echo "$created_when" | cut -dT -f1)_${id}.md"
     echo "Creating file: ${file}"
