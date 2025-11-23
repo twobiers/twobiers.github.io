@@ -31,6 +31,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.4
+          
+      - name: Setup Chroma
+        uses: ./.github/actions/setup-chroma
 
       - run: gem install asciidoctor asciidoctor-chroma
 

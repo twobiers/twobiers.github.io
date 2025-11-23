@@ -1,0 +1,35 @@
+name: Setup Chroma
+description: Setup Chroma for Hugo Asciidoc syntax highlighting
+
+inputs:
+  version:
+    description: 'Chroma version to install'
+    required: false
+    default: '2.20.0'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore cached CLI
+      id: restore-cache
+      uses: actions/cache@v3
+      with:
+        path: $HOME/.cache/chroma
+        key: cli-chroma-${{ inputs.version }}-${{ runner.os }}
+
+    - name: Install Chroma
+      shell: bash
+      if: steps.restore-cache.outputs.cache-hit != 'true'
+      run: |
+        CHROMA_VERSION="${{ inputs.version }}"
+        DOWNLOAD_URL="https://github.com/alecthomas/chroma/releases/download/v${CHROMA_VERSION}/chroma-${CHROMA_VERSION}-${{ runner.os }}-amd64.tar.gz"
+        echo "Installing Chroma version ${CHROMA_VERSION}..."
+
+        curl -sSL "${DOWNLOAD_URL}" | tar -xz -C "$HOME/.cache/chroma"
+        echo "Chroma installed successfully."
+
+    - name: Add CLI to PATH
+      shell: bash
+      run: |
+        echo "$HOME/.cache/chroma" >> $GITHUB_PATH
+        
