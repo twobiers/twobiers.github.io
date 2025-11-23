@@ -22,3 +22,7 @@ enableRobotsTXT = true
 
 [frontmatter]
 	date = [":default", ":filename", ":fileModTime"]
+
+[security]
+[security.exec]
+allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^git$', '^npx$', '^postcss$', '^tailwindcss$', '^asciidoctor$']

@@ -1,0 +1,26 @@
+[#hello,ruby]
+----
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+
+
+[#workflow,yaml]
+----
+name: Release
+permissions: {} # No permissions
+
+on: 
+  push: 
+    branches: 
+    - main
+jobs:
+  release: 
+    permissions: 
+      contents: write
+      packages: write 
+      id-token: write
+----

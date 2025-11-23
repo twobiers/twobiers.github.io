@@ -27,6 +27,13 @@ jobs:
           hugo-version: '0.152.2'
           extended: true
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+
+      - run: gem install asciidoctor asciidoctor-chroma
+
       - uses: actions/cache@v4
         with:
           path: ${{ env.HUGO_CACHEDIR }} 
