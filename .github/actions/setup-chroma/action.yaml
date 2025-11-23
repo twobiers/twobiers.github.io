@@ -25,6 +25,7 @@ runs:
         DOWNLOAD_URL="https://github.com/alecthomas/chroma/releases/download/v${CHROMA_VERSION}/chroma-${CHROMA_VERSION}-${{ runner.os }}-amd64.tar.gz"
         echo "Installing Chroma version ${CHROMA_VERSION}..."
 
+        mkdir -p "$HOME/.cache/chroma"
         curl -sSL "${DOWNLOAD_URL}" | tar -xz -C "$HOME/.cache/chroma"
         echo "Chroma installed successfully."
 
