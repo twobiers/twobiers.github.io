@@ -25,8 +25,17 @@ jobs:
           hugo-version: '0.152.2'
           extended: true
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+
+      - run: gem install asciidoctor
+
       - name: Build
-        run: hugo --minify
+        run: |
+          alias asciidoctor="asciidoctor --attribute=experimental=true --attribute=icons=font"
+          hugo --minify
 
       - uses: actions/upload-pages-artifact@v3
         with:
