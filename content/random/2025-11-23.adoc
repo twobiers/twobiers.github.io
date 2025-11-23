@@ -1,26 +1,79 @@
-[#hello,ruby]
-----
-require 'sinatra'
-
-get '/hi' do
-  "Hello World!"
-end
-----
+= Hello from AsciiDoc
+:icons: font
 
 
-[#workflow,yaml]
-----
-name: Release
-permissions: {} # No permissions
+Hello, World!
 
-on: 
-  push: 
-    branches: 
-    - main
-jobs:
-  release: 
-    permissions: 
-      contents: write
-      packages: write 
-      id-token: write
+This blog now supports AsciiDoc content via the https://asciidoctor.org/[Asciidoctor] toolchain.
+Syntax highlighting is provided by https://github.com/twobiers/asciidoctor-chroma[Asciidoctor Chroma], which integrates seamlessly with this setup.
+
+== Code Examples
+
+Here's a Python function demonstrating basic syntax:
+
+[source,python]
 ----
+def fibonacci(n):
+    """Generate Fibonacci sequence up to n terms."""
+    a, b = 0, 1
+    result = []
+    for _ in range(n):
+        result.append(a)
+        a, b = b, a + b
+    return result
+
+print(fibonacci(10))
+----
+
+== Advanced Features
+
+AsciiDoc supports various features:
+
+* *Bold* and _italic_ text
+* Inline `code snippets`
+* Tables, admonitions, and more
+
+[cols="2,3,1"]
+|===
+|Feature |Description |Support
+
+|Syntax Highlighting
+|Code blocks with language-specific formatting
+|✓
+
+|Tables
+|Structured data presentation
+|✓
+
+|Admonitions
+|Important notes and warnings
+|✓
+
+|Cross-references
+|Internal document linking
+|✓
+|===
+
+
+Here's a Java example with exception handling:
+
+[source,java]
+----
+public class DataProcessor {
+    public static void processData(String[] args) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line.toUpperCase());
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        }
+    }
+}
+----
+
+What isn't working yet (and I know of - its most likely more):
+
+* Admonitions styling is missing
+* Callouts in code blocks are not rendered
