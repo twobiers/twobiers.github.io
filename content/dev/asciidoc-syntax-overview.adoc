@@ -1,0 +1,91 @@
+---
+title: "Asciidoc Syntax Overview"
+---
+= Asciidoc Syntax Overview
+
+== Basic Text Formatting
+
+* *Bold*: `*bold text*` or `**bold text**`
+* _Italic_: `_italic text_` or `__italic text__`
+* `Monospace`: `` `monospace text` ``
+* Superscript: `^superscript^`
+* Subscript: `~subscript~`
+
+== Headings
+
+= Document Title (Level 0)
+== Level 1 Section
+=== Level 2 Section
+==== Level 3 Section
+===== Level 4 Section
+
+== Lists
+
+=== Unordered Lists
+* Item 1
+* Item 2
+** Nested item
+* Item 3
+
+=== Ordered Lists
+. First item
+. Second item
+.. Nested item
+. Third item
+
+== Links and Images
+
+* Link: `https://example.com[Link Text]`
+* Image: `image::path/to/image.png[Alt Text]`
+* Block image: `image::path/to/image.png[Alt Text, width=300]`
+
+== Code Blocks
+
+[source,python]
+----
+def hello():
+    print("Hello, World!")
+----
+
+== Tables
+
+|===
+|Header 1 |Header 2 |Header 3
+
+|Cell 1
+|Cell 2
+|Cell 3
+
+|Cell 4
+|Cell 5
+|Cell 6
+|===
+
+== Admonitions
+
+NOTE: This is a note.
+
+TIP: This is a tip.
+
+IMPORTANT: This is important.
+
+WARNING: This is a warning.
+
+CAUTION: Use caution here.
+
+== Block Quotes
+
+[quote, Author Name]
+____
+This is a block quote.
+____
+
+== Callouts in Code Blocks
+
+[source,python]
+----
+def fetch_data():  # <1>
+    return requests.get('/api/data')  # <2>
+----
+<1> Fetches data from the API.
+<2> Returns the response object.
