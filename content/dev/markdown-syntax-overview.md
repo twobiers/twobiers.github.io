@@ -64,6 +64,19 @@ def hello_world():
         print("Hello, World!")
 ```
 
+**Code Blocks with Highlighting:**
+```go {linenos=inline hl_lines=[3,"6-8"]}
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 3; i++ {
+        fmt.Println("Value of i:", i)
+    }
+}
+```
+
 ### Horizontal Rules
 
 ---
