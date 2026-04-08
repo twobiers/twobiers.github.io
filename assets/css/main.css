@@ -364,11 +364,32 @@ pre.chroma {
     padding: 0 !important;
 }
 
-#sec-random-pages article .prose {
-    background-color: rgb(var(--color-neutral-900) / 0.9);
-    padding: 1em;
-    margin: 1em;
+.random-day {
+    margin-bottom: 2rem;
 }
+
+.random-day-heading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--color-neutral-400));
+    margin-bottom: 0.75rem;
+}
+
+.random-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.random-tags li {
+    margin: 0;
+}
+
 
 /* ==================== Utilities ==================== */
 

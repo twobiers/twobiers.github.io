@@ -1,29 +1,23 @@
 {{ define "main" }}
-  <section id="sec-random-pages" class="mt-8">
+<section id="sec-random-pages">
     {{ range .Pages.GroupByDate "2006-01-02" }}
-    <div>
-        <h3 class="flex text-xl font-semibold">
-            {{ .Key | time.Format "2006-01-02" }}
-        </h3>
-      </div>
-      {{ range .Pages.ByDate.Reverse }}
-      <article class="pb-6">
-        <div class="prose dark:prose-invert">
-          <p class="text-sm text-neutral-400">
-            {{ .Content | emojify }}
-          </p>
-          <ul>
-            {{ range .Params.Tags }}
-            <li class="inline-block mr-2">
-              <a href="/tags/{{ . | urlize }}" class="text-sm text-neutral-400 hover:text-neutral-600">
-                {{ . }}
-              </a>
-            </li>
-            {{ end }}
-          </ul>
-        </div>
-      </article>
-      {{ end }}
+    <div class="random-day">
+        <h3 class="random-day-heading">{{ .Key | time.Format "2006-01-02" }}</h3>
+        {{ range .Pages.ByDate.Reverse }}
+        <article>
+            <div class="prose">
+                {{ .Content | emojify }}
+                {{ with .Params.Tags }}
+                <ul class="random-tags">
+                    {{ range . }}
+                    <li><a href="/tags/{{ . | urlize }}">#{{ . }}</a></li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+            </div>
+        </article>
+        {{ end }}
+    </div>
     {{ end }}
-  </section>
+</section>
 {{ end }}
