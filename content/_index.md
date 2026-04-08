@@ -2,6 +2,6 @@
 title: "twobiers"
 ---
 
-{{<lead>}}
-Hi, I’m Tobi. I'm a Software Engineer based in Germany. I care about way too many things including programming languages, software architecture, engineering culture and basically everything which catches my interest.  :eagle:
-{{</lead>}}
+Hi, I’m Tobi — a Software Engineer based in Germany. I care about programming languages, software architecture, engineering culture, and most things that catch my curiosity.
+
+I write about what I learn and think about on my [blog](/posts). If you want to know more about me, head over to the [about page](/about).

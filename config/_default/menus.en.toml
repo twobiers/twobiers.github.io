@@ -4,11 +4,6 @@
   url  = "/posts"
 
 [[main]]
-  name = "Random"
-  weight = 2
-  url = "/random"
-
-[[main]]
   name = "About"
-  weight = 3
+  weight = 2
   url = "/about"

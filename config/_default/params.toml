@@ -1,16 +1,15 @@
-description = "Web Page Of Stupid Random Stuff"
-homepage.layout = "profile"
+description = "Software Engineer based in Germany"
+homepage.layout = "page"
 
 colorScheme = "avocado"
 dateFormat = "2006-02-01"
 
 [author]
   name = "Tobi"
-  bio = "🥒"
+  bio = "Software Engineer based in Germany"
   image = "img/avatar.jpg"
   links = [
-    { github = "https://github.com/twobiers" },
-    { spotify = "https://open.spotify.com/twobiers" }
+    { github = "https://github.com/twobiers" }
   ]
 
 [article]
