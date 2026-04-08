@@ -1,0 +1,55 @@
+{{ define "main" }}
+<div class="prose">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+    <p>{{ . }}</p>
+    {{ end }}
+    {{ with .Content }}
+    {{ . }}
+    {{ end }}
+</div>
+
+<section class="post-list">
+    {{ $pages := . }}
+    {{ if .IsSection }}
+    {{ $pages = .Pages }}
+    {{ else }}
+    {{ $pages = .RegularPages }}
+    {{ end }}
+
+    {{ if $pages }}
+    {{ range $pages }}
+    {{ if .Draft }}{{ continue }}{{ end }}
+    <article class="post-listing">
+        <header class="post-listing-header">
+            <h2 class="post-listing-title">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            <div class="post-listing-meta">
+                <time datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00" }}">
+                    {{ .Date.Format "January 2, 2006" }}
+                </time>
+                {{ if .ReadingTime }}
+                <span class="reading-time">{{ .ReadingTime }} min read</span>
+                {{ end }}
+            </div>
+        </header>
+        {{ with .Summary }}
+        <p class="post-listing-summary">{{ . }}</p>
+        {{ end }}
+        {{ with .Params.tags }}
+        <div class="post-listing-tags">
+            {{ range . }}
+            <a href="/tags/{{ . | urlize }}" class="tag-link">#{{ . }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+    </article>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+    {{ else }}
+    <p class="no-posts">No posts found.</p>
+    {{ end }}
+</section>
+{{ end }}

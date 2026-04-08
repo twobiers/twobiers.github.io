@@ -1,0 +1,73 @@
+<header>
+    <div class="container header-inner">
+        <div class="header-branding">
+            <a href="/" class="header-logo">{{ .Site.Title }}</a>
+        </div>
+        <nav class="header-nav">
+            <ul class="header-menu">
+                {{ range .Site.Menus.main }}
+                <li>
+                    <a href="{{ .URL }}" class="header-menu-link{{ if $node := $.Site.Home.OutputFormats.Get "html"
+                        }}{{ if eq $.RelPermalink $node.RelPermalink }} active{{ end }}{{ end }}">
+                        {{ .Name }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        <button id="theme-toggle" class="header-theme-toggle" aria-label="Toggle dark mode">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+
+<style>
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-branding a {
+        font-weight: 700;
+        font-size: 1.125rem;
+        text-decoration: none;
+    }
+
+    .header-menu {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+    }
+
+    .header-menu-link {
+        color: rgb(var(--color-text));
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+
+    .header-menu-link:hover {
+        color: rgb(var(--color-primary-600));
+    }
+
+    [data-theme="dark"] .header-menu-link:hover {
+        color: rgb(var(--color-primary-400));
+    }
+
+    .header-theme-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 640px) {
+        .header-menu {
+            gap: 1rem;
+        }
+    }
+</style>

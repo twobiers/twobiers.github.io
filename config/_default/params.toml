@@ -1,11 +1,7 @@
 description = "Software Engineer based in Germany"
-homepage.layout = "custom"
-homepage.showRecent = false
-homepage.recentLimit = 3
 
 mainSections = ["posts"]
 
-colorScheme = "avocado"
 dateFormat = "2006-02-01"
 
 [author]
@@ -21,10 +17,3 @@ dateFormat = "2006-02-01"
     { rss = "/index.xml" }
   ]
 
-[article]
-    showComments = false
-
-[entry]
-    meta = ["date", "categories", "tags"]
-
-enableCodeCopy = true

@@ -1,0 +1,40 @@
+{{ if gt .Paginator.TotalPages 1 }}
+<nav class="pagination">
+    {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}" class="pagination-link pagination-prev">← Previous</a>
+    {{ end }}
+
+    <span class="pagination-info">
+        Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+    </span>
+
+    {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}" class="pagination-link pagination-next">Next →</a>
+    {{ end }}
+</nav>
+{{ end }}
+
+<style>
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0;
+        padding: 1.5rem 0;
+        border-top: 1px solid rgb(var(--color-border));
+    }
+
+    .pagination-link {
+        color: rgb(var(--color-primary-600));
+    }
+
+    [data-theme="dark"] .pagination-link {
+        color: rgb(var(--color-primary-400));
+    }
+
+    .pagination-info {
+        font-size: 0.875rem;
+        color: rgb(var(--color-muted));
+    }
+</style>

@@ -1,0 +1,44 @@
+<section class="profile">
+    {{ with site.Language.Params.Author.image }}
+    {{ $img := resources.Get . }}
+    {{ with $img }}
+    <img class="profile-avatar" src="{{ .Permalink }}" alt="{{ site.Language.Params.Author.name }}" />
+    {{ end }}
+    {{ end }}
+    <h1 class="profile-name">{{ site.Language.Params.Author.name }}</h1>
+    {{ with site.Language.Params.Author.headline }}
+    <p class="profile-headline">{{ . }}</p>
+    {{ end }}
+    {{ partial "author-links.html" . }}
+</section>
+
+<style>
+    .profile {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .profile-avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 2px solid rgba(var(--color-primary-500), 0.3);
+    }
+
+    .profile-name {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.75rem;
+    }
+
+    .profile-headline {
+        color: rgba(var(--color-neutral-600), 1);
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .profile-headline {
+        color: rgba(var(--color-neutral-400), 1);
+    }
+</style>

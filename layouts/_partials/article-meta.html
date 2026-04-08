@@ -1,0 +1,46 @@
+<div class="article-meta">
+    <time datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00" }}" class="article-date">
+        {{ .Date.Format "January 2, 2006" }}
+    </time>
+    {{ if .ReadingTime }}
+    <span class="article-reading-time">{{ .ReadingTime }} min read</span>
+    {{ end }}
+    {{ with .Params.tags }}
+    <div class="article-tags">
+        {{ range . }}
+        <a href="/tags/{{ . | urlize }}" class="tag-link">#{{ . }}</a>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+
+<style>
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(var(--color-neutral-200), 1);
+        color: rgba(var(--color-neutral-600), 1);
+        font-size: 0.875rem;
+    }
+
+    [data-theme="dark"] .article-meta {
+        border-bottom-color: rgba(var(--color-neutral-700), 1);
+        color: rgba(var(--color-neutral-400), 1);
+    }
+
+    .article-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag-link {
+        color: rgba(var(--color-primary-600), 1);
+    }
+
+    [data-theme="dark"] .tag-link {
+        color: rgba(var(--color-primary-400), 1);
+    }
+</style>

@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="prose">
+    <header class="article-header">
+        <h1>{{ .Title }}</h1>
+        {{ partial "article-meta.html" . }}
+    </header>
+
+    <div class="article-content">
+        {{ .Content }}
+    </div>
+
+    {{ if .Params.categories }}
+    <footer class="article-footer">
+        <div class="article-categories">
+            {{ range .Params.categories }}
+            <a href="/categories/{{ . | urlize }}" class="category-link">{{ . }}</a>
+            {{ end }}
+        </div>
+    </footer>
+    {{ end }}
+</article>
+
+{{ if or (gt (len .Site.RegularPages) 1) (gt (len (where .Site.RegularPages "Section" .Section)) 1) }}
+<nav class="article-navigation">
+    {{ if .PrevInSection }}
+    <a href="{{ .PrevInSection.Permalink }}" class="nav-link nav-prev">
+        ← {{ .PrevInSection.Title }}
+    </a>
+    {{ end }}
+    {{ if .NextInSection }}
+    <a href="{{ .NextInSection.Permalink }}" class="nav-link nav-next">
+        {{ .NextInSection.Title }} →
+    </a>
+    {{ end }}
+</nav>
+{{ end }}
+{{ end }}

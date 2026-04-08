@@ -1,0 +1,56 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+
+{{ with .Params.keywords }}
+<meta name="keywords" content="{{ delimit . " ," }}" />
+{{ end }}
+
+<!-- Open Graph -->
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+<meta property="og:title" content="{{ .Title | default .Site.Title }}" />
+<meta property="og:description"
+    content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{ with (or .Params.image .Site.Params.images) }}
+<meta property="og:image" content="{{ (index . 0) | absURL }}" />
+{{ end }}
+
+<!-- Author -->
+{{ with .Site.Params.author.name }}
+<meta name="author" content="{{ . }}" />
+{{ end }}
+
+<!-- Canonical -->
+<link rel="canonical" href="{{ .Permalink }}" />
+
+<!-- Favicon & Manifest -->
+<link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- Dark mode script (inline to prevent flash) -->
+<script>
+    (function () {
+        const theme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const shouldBeDark = theme === 'dark' || (!theme && !prefersLight);
+        document.documentElement.setAttribute('data-theme', shouldBeDark ? 'dark' : 'light');
+    })();
+</script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{ (resources.Get "css/main.css" | fingerprint).Permalink }}" />
+<link rel="stylesheet" href="{{ (resources.Get "css/syntax-light.css" | fingerprint).Permalink }}" />
+<link rel="stylesheet" href="{{ (resources.Get "css/syntax-dark.css" | fingerprint).Permalink }}" />
+<link rel="stylesheet" href="{{ (resources.Get "css/custom.css" | fingerprint).Permalink }}" />
+
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" href="{{ .Site.Home.Permalink }}index.xml" title="{{ .Site.Title }}" />
+
+{{ if eq (getenv "HUGO_ENV") "production" }}
+<meta name="robots" content="index, follow" />
+{{ else }}
+<meta name="robots" content="noindex, nofollow" />
+{{ end }}
+
+<title>{{ .Title | default .Site.Title }}</title>
