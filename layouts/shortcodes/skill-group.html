@@ -1,0 +1,20 @@
+{{ $category := .Get "category" }}
+{{ $items := split (.Get "items") "," }}
+
+<div class="skill-group">
+  <p class="skill-category">{{ $category }}</p>
+  <ul class="skill-tags" role="list">
+    {{ range $items }}
+      {{ $parts := split (strings.TrimSpace .) ":" }}
+      {{ $name := index $parts 0 }}
+      {{ $slug := "" }}
+      {{ if gt (len $parts) 1 }}{{ $slug = strings.TrimSpace (index $parts 1) }}{{ end }}
+      <li class="skill-tag">
+        {{ if $slug }}
+          <img src="https://cdn.simpleicons.org/{{ $slug }}/555555/cccccc" alt="" aria-hidden="true" class="skill-icon" width="16" height="16" />
+        {{ end }}
+        <span>{{ strings.TrimSpace $name }}</span>
+      </li>
+    {{ end }}
+  </ul>
+</div>

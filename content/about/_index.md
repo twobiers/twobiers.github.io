@@ -5,28 +5,36 @@ description: "Software Engineer based in Germany"
 
 ## Who I am
 
-I'm a Software Engineer based in Germany with a strong focus on software development. I think of myself as a problem solver — someone who finds the right solution with the right technology for the context, rather than someone attached to a particular tool or approach.
+I'm a Software Engineer based in Germany with a strong focus on software development. I think of myself as a problem solver, someone who finds the right solution with the right technology for the context, rather than someone attached to a particular tool or approach.
 
 I think a lot about software architecture, system design, engineering culture, and developer experience. I enjoy diving deep into topics until I truly understand them. I believe that with enough curiosity, one can learn anything.
 
 ## What I work with
 
-Programming Languages: Java • Kotlin • TypeScript / JavaScript • Go • Rust
+{{< skill-group category="Programming Languages" items="Java:openjdk, Kotlin:kotlin, TypeScript:typescript, JavaScript:javascript, Go:go, Rust:rust" >}}
 
-Frameworks: Spring Boot • Quarkus • Vert.x • Node.js
+{{< skill-group category="Frameworks" items="Spring Boot:springboot, Quarkus:quarkus, Vert.x, Node.js:nodedotjs" >}}
 
-Infrastructure & Tooling: Linux • Git • Docker • Kubernetes • Terraform • Azure • GitHub Actions • Apache Kafka • Keycloak • Prometheus
+{{< skill-group category="Infrastructure & Tooling" items="Linux:linux, Git:git, Docker:docker, Kubernetes:kubernetes, Terraform:terraform, Azure, GitHub Actions:githubactions, Apache Kafka:apachekafka, Keycloak:keycloak, Prometheus:prometheus, AI, Claude Code:claude" >}}
 
-Methodologies: Agile • TDD • DDD
+{{< skill-group category="Methodologies" items="Agile, TDD, DDD" >}}
 
-Languages: German (Native) • English (Working proficiency)
+{{< skill-group category="Languages" items="German, English" >}}
 
 ## Experience
 
-I currently work as a Software Engineer at the Vaillant Group as part of the Platform Engineering team. The work centers on building an internal development platform and identity management system — topics that sit at the intersection of infrastructure, security, and developer experience.
+{{< experience role="Software Engineer" company="Vaillant Group" >}}
+Part of the Platform Engineering team, building the infrastructure that accelerates development of digital solutions across the group. The two core products are an internal development platform (built on Kubernetes, ArgoCD, Crossplane, and Kyverno) and a central customer identity management system based on Keycloak and OpenID Connect. I was involved in the conceptualization and system architecture of both. Beyond that, I contributed to multiple cross-team initiatives and projects supporting AI adoption and more efficient workflows across the business.
+{{< /experience >}}
 
-Before that, I worked as a Research Associate and Research Assistant at TH Köln in the Archi-Lab, a laboratory for software architecture. I contributed to the Innovation Hub Bergisches Rheinland, organized hackathons, and took on a lead architect role in a distributed systems teaching project called The Microservice Dungeon, which continues to be used in university courses today.
+{{< experience role="Research Associate" company="TH Köln" >}}
+Took on a lead architect role in [The Microservice Dungeon](https://www.archi-lab.io/compounds/dungeon_main.html), a distributed systems teaching platform designed as a turn-based strategy game. The project is still used in university courses today. Alongside this, I organized hackathons for the Innovation Hub Bergisches Rheinland where student teams worked on real projects with member companies.
+{{< /experience >}}
+
+{{< experience role="Research Assistant" company="TH Köln" >}}
+Worked at the Archi-Lab as part of the Innovation Hub Bergisches Rheinland, a regional network focused on digital transformation for SMEs in North Rhine-Westphalia. Contributed to [PROX](https://prox.innovation-hub.de), a platform connecting students, companies, and research institutes for collaborative project work.
+{{< /experience >}}
 
 ## Interests
 
-Beyond my work, software architecture pulls me in as a topic in its own right — the intersection of technical decisions and human systems. Outside of technology: discovering and listening to music, running and the gym, and reading.
+Beyond my work, software architecture pulls me in as a topic in its own right, at the intersection of technical decisions and human systems. Outside of technology: discovering and listening to music, running and the gym, and reading.

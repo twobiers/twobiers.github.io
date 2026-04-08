@@ -36,3 +36,102 @@ I don't like the ticks around inline code, so I remove them
 pre.chroma {
     border: 1px solid var(--tw-prose-code);
 }
+
+/* Experience cards (about page) */
+.experience-card {
+    border: 1px solid rgba(var(--color-neutral-200), 1);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    background-color: rgba(var(--color-neutral-50), 0.5);
+}
+
+.dark .experience-card {
+    border-color: rgba(var(--color-neutral-700), 1);
+    background-color: rgba(var(--color-neutral-800), 0.4);
+}
+
+.experience-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.experience-role {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.experience-company {
+    font-size: 0.8rem;
+    color: rgba(var(--color-neutral-500), 1);
+}
+
+.experience-body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(var(--color-neutral-600), 1);
+}
+
+.dark .experience-body {
+    color: rgba(var(--color-neutral-400), 1);
+}
+
+.experience-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Skill tags (about page) */
+.skill-group {
+    margin-bottom: 1.5rem;
+}
+
+.skill-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(var(--color-neutral-500), 1);
+    margin-bottom: 0.5rem;
+}
+
+.skill-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--color-neutral-300), 1);
+    background-color: rgba(var(--color-neutral-100), 1);
+    font-size: 0.8rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.dark .skill-tag {
+    border-color: rgba(var(--color-neutral-600), 1);
+    background-color: rgba(var(--color-neutral-800), 1);
+}
+
+.skill-icon {
+    display: block;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    min-height: 14px;
+    max-width: 14px;
+    max-height: 14px;
+    flex-shrink: 0;
+    object-fit: contain;
+}

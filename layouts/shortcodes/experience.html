@@ -1,0 +1,9 @@
+<div class="experience-card">
+  <div class="experience-header">
+    <span class="experience-role">{{ .Get "role" }}</span>
+    <span class="experience-company">{{ .Get "company" }}</span>
+  </div>
+  <div class="experience-body">
+    {{ .Inner | markdownify }}
+  </div>
+</div>
