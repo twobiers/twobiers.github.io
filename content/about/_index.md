@@ -39,4 +39,4 @@ Beyond my work, software architecture pulls me in as a topic in its own right, a
 
 ## Get in touch
 
-Open to collaboration and conversations. Reach out via {{< email-link >}} or connect on [LinkedIn](https://www.linkedin.com/in/tobias-hund).
+Open to collaboration and conversations. Reach out via {{< email-link >}}.
