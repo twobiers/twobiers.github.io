@@ -505,22 +505,25 @@ pre.chroma {
     border-radius: 0.5rem;
     text-decoration: none;
     background-color: rgb(var(--color-neutral-50) / 0.5);
-    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.04);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .home-nav-card:hover {
     border-color: rgb(var(--color-primary-400));
-    background-color: rgb(var(--color-neutral-100));
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1), 0 2px 4px rgb(0 0 0 / 0.06);
     text-decoration: none;
 }
 
 [data-theme="dark"] .home-nav-card {
     background-color: rgb(var(--color-neutral-800) / 0.4);
+    border-color: rgb(var(--color-neutral-600));
+    box-shadow: none;
 }
 
 [data-theme="dark"] .home-nav-card:hover {
-    border-color: rgb(var(--color-primary-400));
-    background-color: rgb(var(--color-neutral-700) / 0.5);
+    border-color: rgb(var(--color-primary-500));
+    box-shadow: 0 0 0 3px rgb(var(--color-primary-500) / 0.15);
 }
 
 .home-nav-card-icon {
