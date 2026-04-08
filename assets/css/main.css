@@ -244,7 +244,7 @@ main {
     margin: 0 auto;
     width: 100%;
     max-width: var(--max-width);
-    padding: 0 1rem;
+    padding: 2rem 1rem 0;
 }
 
 .site-header {
@@ -428,7 +428,6 @@ pre.chroma {
 
 .profile {
     text-align: center;
-    padding-top: clamp(2rem, 8vh, 5rem);
     margin-bottom: 2rem;
 }
 
