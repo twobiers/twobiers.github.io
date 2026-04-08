@@ -1,0 +1,11 @@
+<a class="obf-email" data-eu="{{ site.Params.author.emailUser }}" data-ed="{{ site.Params.author.emailDomain }}" href="#">email</a>
+<script>
+(function () {
+  document.querySelectorAll(".obf-email:not([data-obf-done])").forEach(function (el) {
+    el.setAttribute("data-obf-done", "1");
+    var addr = el.dataset.eu + "\u0040" + el.dataset.ed;
+    el.href = "mailto:" + addr;
+    el.textContent = addr;
+  });
+})();
+</script>

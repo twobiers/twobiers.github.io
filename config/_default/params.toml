@@ -17,7 +17,8 @@ dateFormat = "2006-02-01"
   emailDomain = "twobiers.com"
   links = [
     { github = "https://github.com/twobiers" },
-    { linkedin = "https://www.linkedin.com/in/tobias-hund" }
+    { linkedin = "https://www.linkedin.com/in/tobias-hund" },
+    { rss = "/index.xml" }
   ]
 
 [article]

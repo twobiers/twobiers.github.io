@@ -19,8 +19,6 @@ I think a lot about software architecture, system design, engineering culture, a
 
 {{< skill-group category="Methodologies" items="Agile, TDD, DDD" >}}
 
-{{< skill-group category="Languages" items="German, English" >}}
-
 ## Experience
 
 {{< experience role="Software Engineer" company="Vaillant Group" >}}
@@ -38,3 +36,7 @@ Worked at the Archi-Lab as part of the Innovation Hub Bergisches Rheinland, a re
 ## Interests
 
 Beyond my work, software architecture pulls me in as a topic in its own right, at the intersection of technical decisions and human systems. Outside of technology: discovering and listening to music, running and the gym, and reading.
+
+## Get in touch
+
+Open to collaboration and conversations. Reach out via {{< email-link >}} or connect on [LinkedIn](https://www.linkedin.com/in/tobias-hund).

@@ -19,6 +19,16 @@ I don't like the ticks around inline code, so I remove them
     padding: 0 !important;
 }
 
+/* Section heading separators */
+.prose h2 {
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(var(--color-neutral-200), 1);
+}
+
+.dark .prose h2 {
+    border-bottom-color: rgba(var(--color-neutral-700), 1);
+}
+
 /* Currently, I don't like the default width from Congo, so I increase the max-width */
 .max-w-prose {
     max-width: 120ch;
