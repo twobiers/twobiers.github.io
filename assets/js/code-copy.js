@@ -1,6 +1,6 @@
 /**
  * Code Copy Button
- * 
+ *
  * Adds a copy button to all code blocks.
  */
 

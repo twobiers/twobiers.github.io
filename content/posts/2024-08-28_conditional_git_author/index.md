@@ -24,11 +24,11 @@ Basically, within `~/.config/git`, I created multiple author configurations, wit
 In my `~/.gitconfig` I'm now including this configuration using [conditional includes](https://git-scm.com/docs/git-config#_conditional_includes) depending on the current git directory, like this:
 ```ini
 [includeIf "gitdir/i:private/**"]
-    path = ~/.config/git/author-github-noreply.inc
+	path = ~/.config/git/author-github-noreply.inc
 [includeIf "gitdir/i:temp/**"]
 	path = ~/.config/git/author-github-noreply.inc
 [includeIf "gitdir/i:work/**"]
-    path = ~/.config/git/author-work.inc
+	path = ~/.config/git/author-work.inc
 ```
 The benefit of this approach is, that I just need to remember to clone a repository in the correct directory to have my author configured correctly. 
 It would be also feasible to use `hasconfig:remote.*.url` and include the correct author on a matching remote. Personally, I didn't found a reason yet to configure it like this and I feel that this would overcomplicate the mental model.

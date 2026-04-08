@@ -1,6 +1,6 @@
 /**
  * Dark Mode Toggle
- * 
+ *
  * Manages light/dark theme preference and persists it to localStorage.
  */
 
