@@ -5,6 +5,7 @@ description = "The power draw of your computer might be lesser than you think"
 summary = "I've measured the power draw of my computer and noticed that it only demands about 35W in idle and about 100W if doing CPU-heavy work"
 showTableOfContents = false
 issueId = 2
+tags = ["hardware", "performance"]
 +++
 
 As part of my master's thesis I measured the power usage of my computer system.[^1]

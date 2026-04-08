@@ -1,6 +1,8 @@
 +++ 
 draft = false
 title = "Setup git with multiple authors automatically"
+description = "How to configure git to automatically switch author identities based on the directory you're working in"
+tags = ["git", "tooling"]
 +++
 
 I'm pretty sure, I'm not the only one working in multiple git contexts with multiple authors. 

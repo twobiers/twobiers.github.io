@@ -4,6 +4,7 @@ title = "Is The Negation Of Life Goals The Key To Success?"
 description = "Setting upper bounds for failures"
 summary = "Setting upper bounds for failures instead of success goals might improve your mindset"
 date = "2022-01-05"
+tags = ["personal", "mindset"]
 +++
 
 How to set goals in life? Is it really the right approach to say "I want to run a marathon" or "I want to be successful"?

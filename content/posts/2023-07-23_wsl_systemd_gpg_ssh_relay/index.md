@@ -1,7 +1,9 @@
 +++ 
 draft = false
 title = "SSH and GPG Relay inside WSL2 with systemd boot"
+description = "How to relay Windows OpenSSH and GPG agents into WSL2 with systemd"
 issueId = 3
+tags = ["linux", "wsl", "tooling"]
 +++
 
 In this post I will explain how I'm using the Windows OpenSSH and Gpg4Win agents inside WSL2 with systemd.

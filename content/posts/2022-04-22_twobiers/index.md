@@ -3,6 +3,7 @@ draft = false
 title = "twobiers"
 description = "The meaning behind twobiers"
 summary = "Why twobiers?"
+tags = ["personal"]
 +++
 
 There is a german joke:
