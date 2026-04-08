@@ -1,0 +1,37 @@
+{{ partial "profile.html" (dict "align" "center") }}
+
+{{ with .Params.statuses }}
+<div class="not-prose home-statuses">
+  {{ range . }}
+    <span class="status-badge">{{ . }}</span>
+  {{ end }}
+</div>
+{{ end }}
+
+<div class="not-prose home-nav">
+  <a href="/about" class="home-nav-card">
+    <span class="home-nav-card-icon">{{ partial "icon.html" "circle-info" }}</span>
+    <span class="home-nav-card-content">
+      <span class="home-nav-card-title">About me</span>
+      <span class="home-nav-card-desc">My background, experience, and interests</span>
+    </span>
+    <span class="home-nav-card-arrow">→</span>
+  </a>
+  <a href="/posts" class="home-nav-card">
+    <span class="home-nav-card-icon">{{ partial "icon.html" "pencil" }}</span>
+    <span class="home-nav-card-content">
+      <span class="home-nav-card-title">Blog</span>
+      <span class="home-nav-card-desc">
+        {{ len (where .Site.RegularPages "Section" "posts") }} posts on software engineering and beyond
+      </span>
+    </span>
+    <span class="home-nav-card-arrow">→</span>
+  </a>
+</div>
+
+{{ with .Params.now }}
+<div class="not-prose home-now">
+  <p class="home-section-label">Now</p>
+  <p>{{ . }}</p>
+</div>
+{{ end }}

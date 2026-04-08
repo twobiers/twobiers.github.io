@@ -1,15 +1,23 @@
 description = "Software Engineer based in Germany"
-homepage.layout = "page"
+homepage.layout = "custom"
+homepage.showRecent = false
+homepage.recentLimit = 3
+
+mainSections = ["posts"]
 
 colorScheme = "avocado"
 dateFormat = "2006-02-01"
 
 [author]
   name = "Tobi"
-  bio = "Software Engineer based in Germany"
+  headline = "Software Engineer"
+  bio = "Based in Germany. Interested in software architecture, engineering culture, and developer experience."
   image = "img/avatar.jpg"
+  emailUser = "mail"
+  emailDomain = "twobiers.com"
   links = [
-    { github = "https://github.com/twobiers" }
+    { github = "https://github.com/twobiers" },
+    { linkedin = "https://www.linkedin.com/in/tobias-hund" }
   ]
 
 [article]

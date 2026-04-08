@@ -1,0 +1,35 @@
+{{ with site.Language.Params.Author.links }}
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    {{ range $links := . }}
+      {{ range $name, $url := $links }}
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="{{ $url | safeURL }}"
+          target="_blank"
+          aria-label="{{ $name | title }}"
+          rel="me noopener noreferrer"
+        >{{ partial "icon.html" $name }}</a>
+      {{ end }}
+    {{ end }}
+
+    {{ with site.Language.Params.Author.emailUser }}
+      <a
+        class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+        style="will-change:transform;"
+        data-eu="{{ . }}"
+        data-ed="{{ site.Language.Params.Author.emailDomain }}"
+        href="#"
+        aria-label="Email"
+        rel="noopener noreferrer"
+      >{{ partial "icon.html" "email" }}</a>
+      <script>
+        (function () {
+          document.querySelectorAll("a[data-eu][data-ed]").forEach(function (el) {
+            el.href = "mailto:" + el.dataset.eu + "@" + el.dataset.ed;
+          });
+        })();
+      </script>
+    {{ end }}
+  </div>
+{{ end }}
