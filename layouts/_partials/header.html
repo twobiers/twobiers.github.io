@@ -1,7 +1,11 @@
 <header class="site-header">
     <div class="container header-inner">
         <div class="header-branding">
-            <a href="/" class="header-logo">{{ .Site.Title }}</a>
+            {{ $beerMug := resources.Get "icons/beer-mug.svg" }}
+            <a href="/" class="header-logo" aria-label="{{ .Site.Title }}">
+                <span class="beer beer--left">{{ $beerMug.Content | safeHTML }}</span>
+                <span class="beer beer--right">{{ $beerMug.Content | safeHTML }}</span>
+            </a>
         </div>
         <nav class="header-nav">
             <ul class="header-menu">

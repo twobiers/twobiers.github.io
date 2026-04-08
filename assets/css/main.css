@@ -248,10 +248,29 @@ main {
     align-items: center;
 }
 
-.header-branding a {
-    font-weight: 700;
-    font-size: 1.125rem;
+.header-logo {
     line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.header-logo:hover {
+    text-decoration: none;
+}
+
+.beer {
+    display: inline-flex;
+    color: rgb(var(--color-primary-600));
+}
+
+[data-theme="dark"] .beer {
+    color: rgb(var(--color-primary-400));
+}
+
+.beer--left {
+    transform: scaleX(-1);
 }
 
 .header-nav {
