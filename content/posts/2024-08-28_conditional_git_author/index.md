@@ -16,13 +16,13 @@ I found myself multiple times already in situations where I've created a commit 
 After countless errors, I finally found a way to manage this issue at my scale and I'm pretty happy with the solution. 
 
 Basically, within `~/.config/git`, I created multiple author configurations, within a file following the pattern like `author-github-noreply.inc` and the following content:
-```ini
+```
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
-	name = twobiers  
+	name = twobiers
 ```
 In my `~/.gitconfig` I'm now including this configuration using [conditional includes](https://git-scm.com/docs/git-config#_conditional_includes) depending on the current git directory, like this:
-```ini
+```
 [includeIf "gitdir/i:private/**"]
 	path = ~/.config/git/author-github-noreply.inc
 [includeIf "gitdir/i:temp/**"]
