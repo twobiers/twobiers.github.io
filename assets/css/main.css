@@ -1,15 +1,17 @@
 /**
- * Main CSS Foundation
- * 
- * Replaces Congo's Tailwind CSS with a custom CSS property system.
- * Provides reset, typography, layout, and component styles.
+ * Main Stylesheet
+ *
+ * Custom CSS replacing Congo's Tailwind dependency.
+ * Organised as: variables → reset → base → layout → components → utilities.
  */
 
 /* ==================== CSS Custom Properties ==================== */
 
 :root {
-    /* Neutral color scale */
-    --color-neutral-50: 249 250 251;
+    color-scheme: light dark;
+
+    /* Neutral color scale (space-separated for rgb() composition) */
+    --color-neutral-50:  249 250 251;
     --color-neutral-100: 243 244 246;
     --color-neutral-200: 229 231 235;
     --color-neutral-300: 209 213 219;
@@ -22,7 +24,7 @@
     --color-neutral-950: 3 7 18;
 
     /* Primary color (avocado green) */
-    --color-primary-50: 236 252 203;
+    --color-primary-50:  236 252 203;
     --color-primary-300: 190 242 100;
     --color-primary-400: 163 230 53;
     --color-primary-500: 132 204 22;
@@ -30,57 +32,53 @@
     --color-primary-700: 77 124 15;
     --color-primary-950: 26 46 5;
 
-    /* Semantic colors */
-    --color-bg: 255 255 255;
-    --color-text: var(--color-neutral-800);
-    --color-muted: var(--color-neutral-500);
+    /* Semantic tokens — reference these in components, not raw palette values */
+    --color-bg:     255 255 255;
+    --color-text:   var(--color-neutral-800);
+    --color-muted:  var(--color-neutral-600);
     --color-border: var(--color-neutral-200);
 
     /* Layout */
-    --max-width: 72rem;
+    --max-width:   72rem;
     --prose-width: 120ch;
 
     /* Typography */
-    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: "Fira Code", "Source Code Pro", Menlo, Consolas, monospace;
-
-    /* Spacing */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
 
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition-base: 250ms ease;
 }
 
+/* System dark mode (no-JS fallback) */
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: var(--color-neutral-950);
-        --color-text: var(--color-neutral-100);
-        --color-muted: var(--color-neutral-400);
+        --color-bg:     var(--color-neutral-950);
+        --color-text:   var(--color-neutral-100);
+        --color-muted:  var(--color-neutral-400);
         --color-border: var(--color-neutral-700);
     }
 }
 
-/* Dark mode via data-theme attribute */
+/* JS-controlled theme overrides */
 [data-theme="dark"] {
-    --color-bg: var(--color-neutral-950);
-    --color-text: var(--color-neutral-100);
-    --color-muted: var(--color-neutral-400);
+    --color-bg:     var(--color-neutral-950);
+    --color-text:   var(--color-neutral-100);
+    --color-muted:  var(--color-neutral-400);
     --color-border: var(--color-neutral-700);
 }
 
 [data-theme="light"] {
-    --color-bg: 255 255 255;
-    --color-text: var(--color-neutral-800);
-    --color-muted: var(--color-neutral-500);
+    --color-bg:     255 255 255;
+    --color-text:   var(--color-neutral-800);
+    --color-muted:  var(--color-neutral-600);
     --color-border: var(--color-neutral-200);
 }
 
-/* ==================== CSS Reset ==================== */
+/* ==================== Reset ==================== */
 
 *,
 *::before,
@@ -94,7 +92,11 @@ html {
     height: 100%;
 }
 
+/* ==================== Base ==================== */
+
 body {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-text));
@@ -106,38 +108,19 @@ body {
 
 /* ==================== Typography ==================== */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1rem;
     margin-top: 1.5rem;
+    text-wrap: balance;
 }
 
-h1 {
-    font-size: 2rem;
-}
-
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.25rem;
-}
-
-h4 {
-    font-size: 1.1rem;
-}
-
-h5,
-h6 {
-    font-size: 1rem;
-}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+h5, h6 { font-size: 1rem; }
 
 p {
     margin-bottom: 1rem;
@@ -234,11 +217,6 @@ td {
 
 /* ==================== Layout ==================== */
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 main {
     flex: 1;
     margin: 0 auto;
@@ -246,6 +224,8 @@ main {
     max-width: var(--max-width);
     padding: 2rem 1rem 0;
 }
+
+/* ==================== Header / Navigation ==================== */
 
 .site-header {
     width: 100%;
@@ -329,6 +309,8 @@ main {
     }
 }
 
+/* ==================== Footer ==================== */
+
 footer {
     border-top: 1px solid rgb(var(--color-border));
     padding: 2rem 0;
@@ -338,19 +320,14 @@ footer {
     color: rgb(var(--color-muted));
 }
 
-/* ==================== Prose (Article content) ==================== */
+/* ==================== Prose (Article Content) ==================== */
 
 .prose {
     max-width: var(--prose-width);
 }
 
-.prose> :first-child {
-    margin-top: 0;
-}
-
-.prose> :last-child {
-    margin-bottom: 0;
-}
+.prose > :first-child { margin-top: 0; }
+.prose > :last-child  { margin-bottom: 0; }
 
 .prose h2 {
     margin-top: 2rem;
@@ -359,18 +336,38 @@ footer {
 }
 
 .prose blockquote {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-inline: 1rem;
     border-left: 3px solid rgb(var(--color-primary-500));
-    margin: 1.5rem 0;
+    margin-block: 1.5rem;
     color: rgb(var(--color-muted));
     font-style: italic;
 }
 
 /* Chroma syntax highlighting */
-.chroma {
+.chroma,
+pre.chroma {
     background-color: rgb(var(--color-neutral-900)) !important;
     border: 1px solid rgb(var(--color-border));
+}
+
+/* Remove backticks added by prose plugins around inline code */
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+    content: none;
+}
+
+.prose.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding-inline: 1ch;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding: 0 !important;
+}
+
+#sec-random-pages article .prose {
+    background-color: rgb(var(--color-neutral-900) / 0.9);
+    padding: 1em;
+    margin: 1em;
 }
 
 /* ==================== Utilities ==================== */
@@ -381,6 +378,10 @@ footer {
     max-width: var(--max-width);
 }
 
+.max-w-prose {
+    max-width: var(--prose-width);
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -388,40 +389,9 @@ footer {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     white-space: nowrap;
     border-width: 0;
-}
-
-/* ==================== Site-Specific Customizations ==================== */
-
-/* Remove code block backticks */
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
-    content: none;
-}
-
-.prose.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    padding-left: 1ch;
-    padding-right: 1ch;
-}
-
-.prose :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    padding: 0 !important;
-}
-
-.max-w-prose {
-    max-width: 120ch;
-}
-
-#sec-random-pages article .prose {
-    background-color: rgb(var(--color-neutral-900) / 0.9);
-    padding: 1em;
-    margin: 1em;
-}
-
-pre.chroma {
-    border: 1px solid rgb(var(--color-border));
 }
 
 /* ==================== Profile / Home Hero ==================== */
@@ -446,13 +416,9 @@ pre.chroma {
 }
 
 .profile-headline {
-    color: rgb(var(--color-neutral-600));
+    color: rgb(var(--color-muted));
     margin-bottom: 1rem;
     font-size: 0.95rem;
-}
-
-[data-theme="dark"] .profile-headline {
-    color: rgb(var(--color-neutral-400));
 }
 
 /* ==================== Home Page Components ==================== */
@@ -514,11 +480,11 @@ pre.chroma {
     align-items: center;
     gap: 0.75rem;
     padding: 1.1rem 1.25rem;
-    border: 1px solid rgb(var(--color-neutral-200));
+    border: 1px solid rgb(var(--color-border));
     border-radius: 0.5rem;
     text-decoration: none;
     background-color: rgb(var(--color-neutral-50) / 0.5);
-    transition: border-color 0.15s, background-color 0.15s;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .home-nav-card:hover {
@@ -528,7 +494,6 @@ pre.chroma {
 }
 
 [data-theme="dark"] .home-nav-card {
-    border-color: rgb(var(--color-neutral-700));
     background-color: rgb(var(--color-neutral-800) / 0.4);
 }
 
@@ -552,11 +517,7 @@ pre.chroma {
 .home-nav-card-title {
     font-weight: 600;
     font-size: 0.95rem;
-    color: rgb(var(--color-neutral-800));
-}
-
-[data-theme="dark"] .home-nav-card-title {
-    color: rgb(var(--color-neutral-100));
+    color: rgb(var(--color-text));
 }
 
 .home-nav-card-desc {
@@ -566,7 +527,7 @@ pre.chroma {
 
 .home-nav-card-arrow {
     color: rgb(var(--color-neutral-300));
-    transition: transform 0.15s;
+    transition: transform var(--transition-fast);
     flex-shrink: 0;
 }
 
@@ -587,18 +548,16 @@ pre.chroma {
 .home-now {
     margin-bottom: 2rem;
     padding: 1.1rem 1.25rem;
-    border: 1px solid rgb(var(--color-neutral-200));
+    border: 1px solid rgb(var(--color-border));
     border-radius: 0.5rem;
     background-color: rgb(var(--color-neutral-50) / 0.5);
     font-size: 0.9rem;
     line-height: 1.6;
-    color: rgb(var(--color-neutral-600));
+    color: rgb(var(--color-muted));
 }
 
 [data-theme="dark"] .home-now {
-    border-color: rgb(var(--color-neutral-700));
     background-color: rgb(var(--color-neutral-800) / 0.4);
-    color: rgb(var(--color-neutral-400));
 }
 
 .home-now p:last-child {
@@ -608,7 +567,7 @@ pre.chroma {
 /* ==================== Experience Cards ==================== */
 
 .experience-card {
-    border: 1px solid rgb(var(--color-neutral-200));
+    border: 1px solid rgb(var(--color-border));
     border-radius: 0.5rem;
     padding: 1.25rem 1.5rem;
     margin-bottom: 1rem;
@@ -616,7 +575,6 @@ pre.chroma {
 }
 
 [data-theme="dark"] .experience-card {
-    border-color: rgb(var(--color-neutral-700));
     background-color: rgb(var(--color-neutral-800) / 0.4);
 }
 
@@ -640,11 +598,7 @@ pre.chroma {
 .experience-body {
     font-size: 0.875rem;
     line-height: 1.6;
-    color: rgb(var(--color-neutral-600));
-}
-
-[data-theme="dark"] .experience-body {
-    color: rgb(var(--color-neutral-400));
+    color: rgb(var(--color-muted));
 }
 
 .experience-body p:last-child {
@@ -682,7 +636,7 @@ pre.chroma {
     padding: 0.2rem 0.6rem;
     height: 1.75rem;
     border-radius: 9999px;
-    border: 1px solid rgb(var(--color-neutral-300));
+    border: 1px solid rgb(var(--color-border));
     background-color: rgb(var(--color-neutral-100));
     font-size: 0.8rem;
     line-height: 1;
@@ -690,7 +644,6 @@ pre.chroma {
 }
 
 [data-theme="dark"] .skill-tag {
-    border-color: rgb(var(--color-neutral-600));
     background-color: rgb(var(--color-neutral-800));
 }
 
@@ -706,30 +659,29 @@ pre.chroma {
     object-fit: contain;
 }
 
-/* ==================== Navigation & Links ==================== */
+/* ==================== Author Links ==================== */
 
 .author-links {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
-    color: rgb(var(--color-neutral-400));
 }
 
 .author-link {
     padding: 0.25rem;
-    transition: transform var(--transition-fast), color var(--transition-fast);
-    will-change: transform;
     color: rgb(var(--color-neutral-400));
+    transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Override the global [data-theme="dark"] a rule which has higher specificity */
+[data-theme="dark"] .author-link {
+    color: rgb(var(--color-neutral-500));
 }
 
 .author-link:hover {
     transform: scale(1.25);
     color: rgb(var(--color-primary-700));
-}
-
-[data-theme="dark"] .author-link {
-    color: rgb(var(--color-neutral-500));
 }
 
 [data-theme="dark"] .author-link:hover {
@@ -750,11 +702,7 @@ pre.chroma {
 .article-footer {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid rgb(var(--color-neutral-200));
-}
-
-[data-theme="dark"] .article-footer {
-    border-top-color: rgb(var(--color-neutral-700));
+    border-top: 1px solid rgb(var(--color-border));
 }
 
 .article-categories {
@@ -767,14 +715,13 @@ pre.chroma {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
     background-color: rgb(var(--color-neutral-100));
-    border: 1px solid rgb(var(--color-neutral-200));
+    border: 1px solid rgb(var(--color-border));
     font-size: 0.85rem;
     color: rgb(var(--color-primary-600));
 }
 
 [data-theme="dark"] .category-link {
     background-color: rgb(var(--color-neutral-800));
-    border-color: rgb(var(--color-neutral-700));
     color: rgb(var(--color-primary-400));
 }
 
@@ -787,18 +734,16 @@ pre.chroma {
 
 .nav-link {
     padding: 1rem;
-    border: 1px solid rgb(var(--color-neutral-200));
+    border: 1px solid rgb(var(--color-border));
     border-radius: 0.5rem;
     background-color: rgb(var(--color-neutral-50));
     text-decoration: none;
-    color: rgb(var(--color-neutral-800));
-    transition: border-color 0.15s, background-color 0.15s;
+    color: rgb(var(--color-text));
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 [data-theme="dark"] .nav-link {
-    border-color: rgb(var(--color-neutral-700));
     background-color: rgb(var(--color-neutral-800));
-    color: rgb(var(--color-neutral-100));
 }
 
 .nav-link:hover {
@@ -821,11 +766,7 @@ pre.chroma {
 
 .post-listing {
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgb(var(--color-neutral-200));
-}
-
-[data-theme="dark"] .post-listing {
-    border-bottom-color: rgb(var(--color-neutral-700));
+    border-bottom: 1px solid rgb(var(--color-border));
 }
 
 .post-listing:last-child {
@@ -837,12 +778,8 @@ pre.chroma {
 }
 
 .post-listing-title a {
-    color: rgb(var(--color-neutral-800));
+    color: rgb(var(--color-text));
     text-decoration: none;
-}
-
-[data-theme="dark"] .post-listing-title a {
-    color: rgb(var(--color-neutral-100));
 }
 
 .post-listing-title a:hover {
@@ -857,12 +794,8 @@ pre.chroma {
     display: flex;
     gap: 1rem;
     font-size: 0.875rem;
-    color: rgb(var(--color-neutral-600));
+    color: rgb(var(--color-muted));
     margin-bottom: 0.75rem;
-}
-
-[data-theme="dark"] .post-listing-meta {
-    color: rgb(var(--color-neutral-400));
 }
 
 .reading-time {
@@ -871,12 +804,8 @@ pre.chroma {
 }
 
 .post-listing-summary {
-    color: rgb(var(--color-neutral-600));
+    color: rgb(var(--color-muted));
     margin: 0.5rem 0;
-}
-
-[data-theme="dark"] .post-listing-summary {
-    color: rgb(var(--color-neutral-400));
 }
 
 .post-listing-tags {
@@ -934,4 +863,16 @@ pre.chroma {
 .code-copy-btn.copied {
     background-color: rgb(var(--color-primary-600) / 0.8);
     border-color: rgb(var(--color-primary-500));
+}
+
+/* ==================== Accessibility ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
