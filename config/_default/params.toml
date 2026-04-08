@@ -21,8 +21,6 @@ dateFormat = "2006-02-01"
     { rss = "/index.xml" }
   ]
 
-images = ["/img/avatar.jpg"]
-
 [article]
     showComments = false
 
