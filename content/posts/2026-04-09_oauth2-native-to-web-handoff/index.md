@@ -18,7 +18,7 @@ OAuth 2.0 and OIDC draw a hard line between native and web contexts, and for goo
 
 These two mechanisms are intentionally isolated from one another. An embedded WebView has its own cookie store, separate from the system browser and inaccessible to the native app's token storage. When your WebView performs a normal `/authorize` redirect, Keycloak sees a fresh, unauthenticated browser session. The user gets a login screen.
 
-![OAuth native app flow diagram](https://developer.okta.com/assets-jekyll/blog/oauth-for-native-apps/oauth-native-apps-1-f8d5d85db10ad95ad7a64ce6ced63cb58f5d6bcca3d6ecfb00d87455a8a2c24e.png)
+<img src="https://images.ctfassets.net/23aumh6u8s0i/3ULKZFPLQiGXHa9NFNCpCS/bd5c463c34ae60a1aee86af0db199b3a/hoauth-flow" alt="OAuth native app flow diagram" loading="lazy" style="max-width: min(100%, 42rem);" />
 
 [RFC 8252: OAuth 2.0 for Native Apps](https://www.rfc-editor.org/rfc/rfc8252) actually anticipated this. It explicitly recommends against embedded WebViews for authorization flows, precisely because they break cookie-based SSO. The spec-compliant answer is to use the system browser (Android Custom Tabs, iOS ASWebAuthenticationSession), where the existing Keycloak session cookie is already present.
 
@@ -43,14 +43,12 @@ We spent time researching how other organizations handle this, and the findings 
 
 All three approaches, despite their differences, have the same underlying shape:
 
-```
-Native App (holds access token)
-  → calls backend with token
-  → receives short-lived, single-use token or session handle
-  → opens WebView with that token in the URL
-  → backend redeems token, creates web session
-  → user arrives authenticated
-```
+1. The native app already holds a valid access token.
+2. It calls a backend endpoint to initiate the handoff.
+3. The backend returns a short-lived, single-use token or session handle.
+4. The app opens the WebView with that value.
+5. The backend redeems it, creates the web session, and sets the cookie.
+6. The user arrives authenticated.
 
 The variation is in who issues the bridge token and what the resulting session is scoped to. But the architecture is the same everywhere.
 
@@ -60,25 +58,25 @@ After evaluating the options, we settled on [OAuth 2.0 Token Exchange (RFC 8693)
 
 Token Exchange fits that constraint. It is a standard grant type that Keycloak supports natively, no extensions or custom code required. The native app passes its existing access token to the target web application's backend. That backend calls Keycloak's token exchange endpoint, which validates the token and returns a new one scoped to the target client. The web app uses that token to create a session and set a cookie. The user arrives authenticated.
 
-![Token exchange flow diagram](https://www.authlete.com/assets/images/rfc8693-token-exchange.png)
+![Native app to web app token exchange flow](native-app-token-exchange.drawio.png)
 
-```
-Native App
-  → opens WebView, passes access token as URL parameter
+1. The native app opens the WebView and passes its access token to the target web app.
+2. The target web app backend receives the token.
+3. The backend calls Keycloak's token endpoint:
 
-Target Web App (Backend)
-  → receives token
-  → calls Keycloak: POST /realms/{realm}/protocol/openid-connect/token
-      grant_type=urn:ietf:params:oauth:grant-type:token-exchange
-      &subject_token=<access_token>
-      &subject_token_type=urn:ietf:params:oauth:token-type:access_token
-      &requested_token_type=urn:ietf:params:oauth:token-type:access_token
-      &client_id=<target_client_id>
-      &client_secret=<target_client_secret>
-  → receives token scoped to target client
-  → creates server-side session, sets cookie
-  → redirects user to target page
-```
+   ```text
+   POST /realms/{realm}/protocol/openid-connect/token
+   grant_type=urn:ietf:params:oauth:grant-type:token-exchange
+   &subject_token=<access_token>
+   &subject_token_type=urn:ietf:params:oauth:token-type:access_token
+   &requested_token_type=urn:ietf:params:oauth:token-type:access_token
+   &client_id=<target_client_id>
+   &client_secret=<target_client_secret>
+   ```
+
+4. Keycloak returns a token scoped to the target client.
+5. The web app creates a server-side session and sets its session cookie.
+6. The user is redirected to the target page already authenticated.
 
 The setup on the Keycloak side is purely configuration: enabling token exchange for the relevant clients and defining which clients are permitted to exchange tokens on behalf of which others. No custom provider code, no additional services, nothing outside of what the Keycloak admin console exposes.
 
@@ -113,3 +111,4 @@ If you are dealing with this problem, you are in good company. And now, at least
 - [Keycloak: Configuring and Using Token Exchange](https://www.keycloak.org/securing-apps/token-exchange)
 - [Keycloak 26.2: Standard Token Exchange now officially supported](https://www.keycloak.org/2025/05/standard-token-exchange-kc-26-2)
 - [Keycloak: Backchannel Logout](https://www.keycloak.org/docs/latest/securing_apps/#_backchannel_logout)
+- [Keycloak: Feature Request "Native-to-Web SSO / Session Transfer for Embedded WebViews" ](https://github.com/keycloak/keycloak/issues/46660)

@@ -357,6 +357,14 @@ footer {
     border-bottom: 1px solid rgb(var(--color-border));
 }
 
+.prose img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 0.375rem;
+}
+
 .prose blockquote {
     padding-inline: 1rem;
     border-left: 3px solid rgb(var(--color-primary-500));
