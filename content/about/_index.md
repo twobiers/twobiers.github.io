@@ -11,13 +11,15 @@ I think a lot about software architecture, system design, engineering culture, a
 
 ## What I work with
 
-{{< skill-group category="Programming Languages" items="Java:openjdk, Kotlin:kotlin, TypeScript:typescript, JavaScript:javascript, Go:go, Rust:rust" >}}
-
-{{< skill-group category="Frameworks" items="Spring Boot:springboot, Quarkus:quarkus, Vert.x, Node.js:nodedotjs" >}}
-
-{{< skill-group category="Infrastructure & Tooling" items="Linux:linux, Git:git, Docker:docker, Kubernetes:kubernetes, Terraform:terraform, Azure, GitHub Actions:githubactions, Apache Kafka:apachekafka, Keycloak:keycloak, Prometheus:prometheus, AI, Claude Code:claude" >}}
-
-{{< skill-group category="Methodologies" items="Agile, TDD, DDD" >}}
+{{< skills-section >}}
+{{< skill-group category="Programming Languages" items="Java:openjdk, Kotlin:kotlin, TypeScript:typescript, JavaScript:javascript, Python:python, Go:go" >}}
+{{< skill-group category="Frameworks & Runtimes" items="Spring Boot:springboot, Quarkus:quarkus, Node.js:nodedotjs" >}}
+{{< skill-group category="Cloud & Infrastructure" items="Docker:docker, Kubernetes:kubernetes, Terraform:terraform, Azure, Crossplane, Kyverno" >}}
+{{< skill-group category="Developer Tooling" items="Linux:linux, Git:git, GitHub Actions:githubactions, Backstage:backstage" >}}
+{{< skill-group category="Platform & Services" items="Apache Kafka:apachekafka, Keycloak:keycloak, Prometheus:prometheus, Grafana:grafana, Loki, Tempo, Mimir" >}}
+{{< skill-group category="AI Tools" items="Claude Code:claude, GitHub Copilot:githubcopilot" >}}
+{{< skill-group category="Methodologies" items="Agile, TDD, DDD, AI-assisted Development" >}}
+{{< /skills-section >}}
 
 ## Experience
 

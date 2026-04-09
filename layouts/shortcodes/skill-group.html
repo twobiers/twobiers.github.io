@@ -1,7 +1,8 @@
 {{ $category := .Get "category" }}
 {{ $items := split (.Get "items") "," }}
+{{ $full := .Get "full" }}
 
-<div class="skill-group">
+<div class="skill-group{{ if $full }} skill-group--full{{ end }}">
   <p class="skill-category">{{ $category }}</p>
   <ul class="skill-tags" role="list">
     {{ range $items }}
