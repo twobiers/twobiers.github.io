@@ -950,6 +950,10 @@ pre.chroma {
     flex-shrink: 0;
 }
 
+.ai-disclosure-badge svg + svg {
+    margin-left: -0.1em;
+}
+
 /* ==================== Accessibility ==================== */
 
 @media (prefers-reduced-motion: reduce) {
