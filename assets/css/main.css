@@ -932,6 +932,24 @@ pre.chroma {
     border-color: rgb(var(--color-primary-500));
 }
 
+/* ==================== AI Disclosure Badge ==================== */
+
+.ai-disclosure-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    font-size: 0.8125rem;
+    color: inherit;
+    opacity: 0.75;
+}
+
+.ai-disclosure-badge svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
 /* ==================== Accessibility ==================== */
 
 @media (prefers-reduced-motion: reduce) {

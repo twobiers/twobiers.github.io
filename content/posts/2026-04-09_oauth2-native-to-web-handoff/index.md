@@ -3,6 +3,7 @@ draft: false
 title: "The Problem Nobody Has Named Yet: Native-to-Web SSO"
 description: "Native apps and web apps use incompatible session mechanisms. Here is how to bridge them with OAuth 2.0 Token Exchange."
 tags: ["oauth2", "security", "mobile", "keycloak"]
+ai_assisted: true
 ---
 
 There is a gap in the OAuth 2.0 ecosystem that almost every team with a native mobile app eventually falls into. It does not have a widely agreed-upon name. It is not covered by any RFC. And yet, once you hit it, you quickly realize that everyone else has hit it too, and solved it differently.
