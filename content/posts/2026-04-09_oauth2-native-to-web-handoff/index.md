@@ -39,7 +39,9 @@ We spent time researching how other organizations handle this, and the findings 
 
 **Spotify** took a slightly different angle. Their app generates a One-Time Token (OTT) and injects it into the target URL when opening a WebView. On page load, the OTT is redeemed server-side, a web session is created, and the user is authenticated. Short-lived, single-use, no persistent token exposure.
 
-**Auth0** recognized the pattern too. They released a [Native-to-Web SSO](https://auth0.com/docs/authenticate/single-sign-on/native-to-web) feature in 2024 (the only off-the-shelf solution we found). It is proprietary and tied to their platform, but its existence signals that the industry is starting to acknowledge this as a real, named problem worth solving at the product level.
+**Auth0** recognized the pattern too. They released a [Native-to-Web SSO](https://auth0.com/docs/authenticate/single-sign-on/native-to-web) feature in 2024 (the only true off-the-shelf solution we found). It is proprietary and tied to their platform, but its existence signals that the industry is starting to acknowledge this as a real, named problem worth solving at the product level.
+
+**Connect2id** follows a similar pattern as Auth0 with a [web session bootstrap endpoint](https://connect2id.com/products/server/docs/guides/web-session-bootstrap-for-native-apps).
 
 All three approaches, despite their differences, have the same underlying shape:
 
