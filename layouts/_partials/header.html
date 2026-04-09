@@ -3,8 +3,8 @@
         <div class="header-branding">
             {{ $beerMug := resources.Get "icons/beer-mug.svg" }}
             <a href="/" class="header-logo" aria-label="{{ .Site.Title }}">
-                <span class="beer beer--left">{{ $beerMug.Content | safeHTML }}</span>
-                <span class="beer beer--right">{{ $beerMug.Content | safeHTML }}</span>
+                <span class="beer beer--left"><span class="beer-inner">{{ $beerMug.Content | safeHTML }}</span></span>
+                <span class="beer beer--right"><span class="beer-inner">{{ $beerMug.Content | safeHTML }}</span></span>
             </a>
         </div>
         <nav class="header-nav">

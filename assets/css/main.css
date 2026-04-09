@@ -272,8 +272,41 @@ main {
     color: rgb(var(--color-primary-400));
 }
 
+/* Flip the left mug to face right */
 .beer--left {
     transform: scaleX(-1);
+}
+
+/* Inner wrapper handles rotation independently of the flip */
+.beer-inner {
+    display: inline-flex;
+    transform-origin: center bottom;
+}
+
+@keyframes beer-clink-left {
+    0%   { transform: rotate(0deg); }
+    35%  { transform: rotate(-20deg); }
+    55%  { transform: rotate(-12deg); }
+    70%  { transform: rotate(-18deg); }
+    85%  { transform: rotate(-14deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes beer-clink-right {
+    0%   { transform: rotate(0deg); }
+    35%  { transform: rotate(-20deg); }
+    55%  { transform: rotate(-12deg); }
+    70%  { transform: rotate(-18deg); }
+    85%  { transform: rotate(-14deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.header-logo:hover .beer--left .beer-inner {
+    animation: beer-clink-left 600ms ease-in-out forwards;
+}
+
+.header-logo:hover .beer--right .beer-inner {
+    animation: beer-clink-right 600ms ease-in-out forwards;
 }
 
 .header-nav {
