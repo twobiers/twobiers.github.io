@@ -12,7 +12,7 @@ jobs:
     env:
       HUGO_CACHEDIR: /tmp/hugo_cache
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
@@ -33,7 +33,7 @@ jobs:
 
       - run: gem install asciidoctor asciidoctor-chroma
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: ${{ env.HUGO_CACHEDIR }} 
           key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
